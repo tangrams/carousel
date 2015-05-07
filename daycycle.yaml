@@ -1,0 +1,112 @@
+cameras:
+    camera1:
+        type: isometric
+        axis: [1, 1]
+        # focal_length: 2
+        # vanishing_point: [-250, -250] # relative to center of screen, in pixels
+
+lights:
+    sun:
+        type: directional
+        direction: [0, 1, -.5]
+        diffuse: [1, 1, 1]
+        ambient: .5
+    moon:
+        type: directional
+        direction: [0, 1, -.5]
+        diffuse: [0, 0, .5]
+        ambient: .2
+
+sources:
+    osm:
+        type: TopoJSONTiles
+        url:  http://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson
+
+styles:
+    roads:
+        base: lines
+        material:
+            diffuse: 1
+            emission: 1
+    water:
+        base: polygons
+        material:
+            diffuse: 1
+            ambient: 1
+    buildings:
+        base: polygons
+        material:
+            diffuse: 1
+            ambient: 1
+
+layers:
+    earth:
+        data: { source: osm }
+        draw:
+            polygons:
+                order: 0
+                color: '#ddeeee'
+
+    landuse:
+        data: { source: osm }
+        draw:
+            polygons:
+                order: 1
+                color: '#aaddaa'
+
+    water:
+        data: { source: osm }
+        draw:
+            polygons:
+                style: water
+                order: 2
+                color: '#88bbee'
+
+    roads:
+        data: { source: osm }
+        filter:
+            not: { kind: ["path", "rail"] }
+        draw:
+            lines:
+                style: roads
+                order: 3
+                color: gray    
+                width: 8
+                cap: round
+        highway:
+            filter:
+                kind: highway
+            draw:
+                lines:
+                    order: 2
+                    color: '#aa6666'
+                    width: 12
+                outline:
+                    order: 2
+                    style: lines
+                    color: grey
+                    width: 15
+        minor_road:
+            filter:
+                kind: minor_road
+            draw:
+                lines:
+                    order: -2
+                    color: lightgrey
+                    width: 5
+    
+    buildings:
+        data: { source: osm }
+        draw:
+            polygons:
+                style: buildings
+                order: 4
+                color: |
+                    function () {
+                        var h = feature.height || 20;
+                        h = Math.min((h + 50)/ 255, .8); // max brightness: .9
+                        h = Math.max(h, .7); // min brightness: .4
+                        return [h, h, h];
+                    }
+                extrude: true
+

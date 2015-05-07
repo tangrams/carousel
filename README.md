@@ -1,2 +1,3 @@
 # carousel
-This repo is loaded in the iFrame in the Tangram project page header.
+
+This repo is loaded into the iFrame on the [Tangram](http://github.com/tangrams/tangram) project page header.
