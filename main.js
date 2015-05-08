@@ -1,9 +1,9 @@
 /*** Map ***/
 
 var styles = {
-    "daycycle": "https://cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml",
+    "daycycle": "//cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml",
 
-    "highways": "https://cdn.rawgit.com/tangrams/highways-demo/bdf7d73c3bc50a54e100d3f18e37c8e09226c3fe/scene.yaml"
+    "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml"
 };
 
 var map = L.map('map',
