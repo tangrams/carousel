@@ -24,7 +24,7 @@
         #map {
             background: rgba(0, 0, 0, 0);
         }
-        #testdiv{
+        .testdiv{
             position:absolute;
             top:200px;
             left:50px;
@@ -39,7 +39,6 @@
 
   <body>
     <div id="map"></div>
-    <div id="testdiv"> HI I am ugly text in ugly box</div>
 
     <!-- 3rd party libraries -->
     <script src="lib/leaflet/leaflet.js"></script>
@@ -59,6 +58,10 @@
 
     window.addEventListener("DOMContentLoaded", function() {
       if (window.self !== window.top) {
+        //what happens if it is iframed?
+        var el = document.createElement('div');
+        el.className = 'testdiv';
+        el.innerHTML = "HI I am ugly text in ugly box";
         //sending message that child frame is loaded to parent
         window.parent.postMessage("loaded", "*");
         window.addEventListener("message", function(e) {
