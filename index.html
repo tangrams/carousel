@@ -15,6 +15,7 @@
 
     <style>
         body {
+            position:relative;
             margin: 0px;
             border: 0px;
             padding: 0px;
@@ -23,11 +24,22 @@
         #map {
             background: rgba(0, 0, 0, 0);
         }
+        #testdiv{
+            position:absolute;
+            top:50px;
+            left:50px;
+            width:200px;
+            height:200px;
+            z-index:1000;
+            background-color:#fff;
+            color:#000;
+        }
     </style>
   </head>
 
   <body>
     <div id="map"></div>
+    <div id="testdiv"> HI I am ugly text in ugly box</div>
 
     <!-- 3rd party libraries -->
     <script src="lib/leaflet/leaflet.js"></script>
@@ -44,6 +56,18 @@
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
       window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
+
+    window.addEventListener("DOMContentLoaded", function() {
+
+    if(!self == window){
+        window.parent.postMessage("loaded", "*");
+        window.addEventListener("message", function(e) {
+            document.getElementById("testdiv").innerHTML = e.data;
+        }, false);
+    }
+    }, false);
+    
+
     </script>
   </body>
 </html>
