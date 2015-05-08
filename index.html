@@ -69,6 +69,7 @@
         window.parent.postMessage("loaded", "*");
         window.addEventListener("message", function(e) {
           ///** event that happens with parent data
+          console.log("got message");
           testEvent(e.data);
         }, false);
       }else{
@@ -77,6 +78,9 @@
     }, false);
     
      function testEvent(message){
+       console.log("happening");
+       console.log(message);
+
        document.getElementsByClassName("testdiv").innerHTML = message;
      }
 
