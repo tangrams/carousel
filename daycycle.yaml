@@ -1,3 +1,12 @@
+# scene:
+#     animated: true
+#     background: 
+
+sources:
+    osm:
+        type: TopoJSONTiles
+        url:  http://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson
+
 cameras:
     camera1:
         type: isometric
@@ -16,11 +25,6 @@ lights:
         direction: [0, 1, -.5]
         diffuse: [0, 0, .5]
         ambient: .2
-
-sources:
-    osm:
-        type: TopoJSONTiles
-        url:  http://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson
 
 styles:
     roads:
