@@ -1,7 +1,7 @@
 // dependencies: jQuery, select2
 var CITY_DATA
 
-$.get('https://gist.githubusercontent.com/randymeech/e9398d4f6fb827e2294a/raw/e24f159af024d402912707c88b26d7361932f906/top-1000-cities.json', function (data) {
+$.get('https://gist.githubusercontent.com/randymeech/e9398d4f6fb827e2294a/raw/', function (data) {
     CITY_DATA = JSON.parse(data);
     CITY_DATA.sort(function (a, b) {
         if (a.name < b.name)
