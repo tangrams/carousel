@@ -59,12 +59,11 @@
 
     window.addEventListener("DOMContentLoaded", function() {
 
-    if(!self == window){
-        window.parent.postMessage("loaded", "*");
-        window.addEventListener("message", function(e) {
-            document.getElementById("testdiv").innerHTML = e.data;
-        }, false);
-    }
+            window.parent.postMessage("loaded", "*");
+            window.addEventListener("message", function(e) {
+                document.getElementById("testdiv").innerHTML = e.data;
+            }, false);
+
     }, false);
     
 
