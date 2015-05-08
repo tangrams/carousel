@@ -70,6 +70,7 @@
         window.addEventListener("message", function(e) {
           ///** event that happens with parent data
           console.log("got message");
+          document.getElementsByClassName("testdiv").innerHTML = e.data;
           testEvent(e.data);
         }, false);
       }else{
@@ -81,7 +82,7 @@
        console.log("happening");
        console.log(message);
 
-       document.getElementsByClassName("testdiv").innerHTML = message;
+     //  document.getElementsByClassName("testdiv").innerHTML = message;
      }
 
     </script>
