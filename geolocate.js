@@ -35,7 +35,7 @@ var onGeolocateError = function (err) {
 var resetGeolocateButton = function () {
     var button = document.getElementById('geolocator').querySelector('.geolocate-button');
     button.classList.remove('geolocating');
-    button.textContent = '✕'
+    button.textContent = '🌐'
 }
 
 document.getElementById('geolocator').querySelector('.geolocate-button').addEventListener('click', function (e) {
