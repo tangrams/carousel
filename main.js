@@ -1,11 +1,17 @@
 /*** Map ***/
 
+var styles = {
+    "daycycle": "https://cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml",
+
+    "highways": "https://cdn.rawgit.com/tangrams/highways-demo/bdf7d73c3bc50a54e100d3f18e37c8e09226c3fe/scene.yaml"
+};
+
 var map = L.map('map',
     {'keyboardZoomOffset': .05}
 );
 
 var layer = Tangram.leafletLayer({
-    scene: 'daycycle.yaml',
+    scene: styles['highways'],
     preUpdate: preUpdate,
     postUpdate: postUpdate,
     attribution: 'Map data &copy; OpenStreetMap contributors'
@@ -16,7 +22,7 @@ window.scene = layer.scene;
 
 layer.addTo(map);
 
-map.setView([40.70531887544228, -74.00976419448853], 15);
+map.setView([40.70531887544228, -74.00976419448853], 13);
 
 var hash = new L.Hash(map);
 
@@ -30,29 +36,19 @@ function resizeMap() {
 function switchStyles(style) {
     console.log("style:", style);
     currentStyle = style;
-    switch(style) {
-        case "daycycle":
-            url = "https://github.com/tangrams/carousel/blob/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml";
-            break;
-        case "highways":
-            url = "https://cdn.rawgit.com/tangrams/highways-demo/bdf7d73c3bc50a54e100d3f18e37c8e09226c3fe/scene.yaml";
-            break;
-    }
-    layer.scene.config_source = url;
-    layer.scene.reload();
-    // layer.scene.reload(url);
+    layer.scene.reload(styles[style]);
 }
 
 
 function preUpdate() {
+}
+
+function postUpdate() {
     switch(currentStyle) {
         case "daycycle":
             daycycle();
             break;
     }
-}
-
-function postUpdate() {
 }
 
 function daycycle() {
@@ -89,7 +85,7 @@ function daycycle() {
 
 var currentStyle = "daycycle";
 
-switchStyles("daycycle");
+switchStyles("highways");
 
 
 window.addEventListener('resize', resizeMap);
