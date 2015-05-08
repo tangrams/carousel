@@ -55,14 +55,16 @@
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
     window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
+    if (window.self !== window.top) {
+      //what happens if it is iframed?
+      var el = document.createElement('div');
+      el.className = 'testdiv';
+      el.innerHTML = "HI I am ugly text in ugly box";
+      document.body.appendChild(el);
+    }
 
     window.addEventListener("DOMContentLoaded", function() {
       if (window.self !== window.top) {
-        //what happens if it is iframed?
-        var el = document.createElement('div');
-        el.className = 'testdiv';
-        el.innerHTML = "HI I am ugly text in ugly box";
-        document.body.appendChild(el);
         //sending message that child frame is loaded to parent
         window.parent.postMessage("loaded", "*");
         window.addEventListener("message", function(e) {
