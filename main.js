@@ -103,7 +103,8 @@ resizeMap();
         window.parent.postMessage("loaded", "*");
         window.addEventListener("message", function(e) {
           ///** event that happens with parent data
-          console.log("got message");
+          console.log("got message:");
+          console.log("*"+e.data+"*");
 
           switchStyles(e.data);
 
