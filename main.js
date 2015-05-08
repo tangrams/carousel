@@ -112,20 +112,6 @@ resizeMap();
     }, false);
 
 
-
-    function initializeIframeEvent(){
-      if (window.self !== window.top) {
-        //what happens if it is iframed?
-        var el = document.createElement('div');
-        el.className = 'testdiv';
-        el.innerHTML = "HI I am ugly text in ugly box";
-        document.body.appendChild(el);
-      }
-    }
-   
-        initializeIframeEvent();
-
-
     //replace this function to real cool one
     function testEvent(message){
       console.log("happening");
