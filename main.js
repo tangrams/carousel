@@ -77,11 +77,14 @@ function daycycle() {
 
     px = Math.min(x, 0); // positive x
     py = Math.min(y, 0); // positive y
+    // light up the roads at night
     scene.styles["roads"].material.emission.amount = [-py, -py, -py, 1];
+    // turn water black at night
     scene.styles["water"].material.ambient.amount = [py+1, py+1, py+1, 1];
     scene.styles["water"].material.diffuse.amount = [py+1, py+1, py+1, 1];
-    
-    ba = -py*.75+.75; // building ambient
+
+    // turn up buildings' ambient response at night
+    ba = -py*.75+.75;
     scene.styles["buildings"].material.ambient.amount = [ba, ba, ba, 1];
 
     scene.animated = true;
