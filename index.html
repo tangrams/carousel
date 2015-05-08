@@ -62,6 +62,7 @@
         var el = document.createElement('div');
         el.className = 'testdiv';
         el.innerHTML = "HI I am ugly text in ugly box";
+        document.body.appendChild(el);
         //sending message that child frame is loaded to parent
         window.parent.postMessage("loaded", "*");
         window.addEventListener("message", function(e) {
