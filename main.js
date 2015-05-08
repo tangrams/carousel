@@ -27,17 +27,15 @@ function resizeMap() {
     map.invalidateSize(false);
 }
 
-var currentStyle = "daycycle";
-
 function switchStyles(style) {
     console.log("style:", style);
     currentStyle = style;
     switch(style) {
         case "daycycle":
-            url = style + ".yaml";
+            url = "https://github.com/tangrams/carousel/blob/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml";
             break;
         case "highways":
-            url = "https://cdn.rawgit.com/tangrams/highways-demo/fd756b5f7c789f71d26bf62b18b98a7dcb7eb468/scene.yaml"
+            url = "https://cdn.rawgit.com/tangrams/highways-demo/bdf7d73c3bc50a54e100d3f18e37c8e09226c3fe/scene.yaml";
             break;
     }
     layer.scene.config_source = url;
@@ -45,7 +43,6 @@ function switchStyles(style) {
     // layer.scene.reload(url);
 }
 
-switchStyles("daycycle");
 
 function preUpdate() {
     switch(currentStyle) {
@@ -90,5 +87,52 @@ function daycycle() {
     scene.animated = true;
 }
 
+var currentStyle = "daycycle";
+
+switchStyles("daycycle");
+
+
 window.addEventListener('resize', resizeMap);
 resizeMap();
+
+
+// iFrame integration
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.self !== window.top) {
+        //sending message that child frame is ready to parent window
+        window.parent.postMessage("loaded", "*");
+        window.addEventListener("message", function(e) {
+          ///** event that happens with parent data
+          console.log("got message");
+
+          switchStyles(e.data);
+
+          // testEvent(e.data);
+        }, false);
+      }else{
+        console.log("not iframed!");
+      }
+    }, false);
+
+
+
+    function initializeIframeEvent(){
+      if (window.self !== window.top) {
+        //what happens if it is iframed?
+        var el = document.createElement('div');
+        el.className = 'testdiv';
+        el.innerHTML = "HI I am ugly text in ugly box";
+        document.body.appendChild(el);
+      }
+    }
+   
+        initializeIframeEvent();
+
+
+    //replace this function to real cool one
+    function testEvent(message){
+      console.log("happening");
+      console.log(message);
+      document.getElementsByClassName("testdiv")[0].innerHTML = message;
+    }
+
