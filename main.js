@@ -108,23 +108,13 @@ resizeMap();
         window.parent.postMessage("loaded", "*");
         window.addEventListener("message", function(e) {
           ///** event that happens with parent data
-          console.log("got message:");
-          console.log("*"+e.data+"*");
+          // console.log("got message:");
+          // console.log("*"+e.data+"*");
 
           switchStyles(e.data);
 
-          // testEvent(e.data);
         }, false);
       }else{
-        console.log("not iframed!");
+        // console.log("not iframed!");
       }
     }, false);
-
-
-    //replace this function to real cool one
-    function testEvent(message){
-      console.log("happening");
-      console.log(message);
-      document.getElementsByClassName("testdiv")[0].innerHTML = message;
-    }
-
