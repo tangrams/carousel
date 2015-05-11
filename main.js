@@ -41,7 +41,6 @@ function resizeMap() {
 }
 
 function switchStyles(style) {
-    console.log("style:", style);
     currentStyle = style;
     layer.scene.reload(styles[style]);
 }
