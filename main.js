@@ -9,7 +9,7 @@ var styles = {
 
     "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
 
-    "traditional": "//cdn.rawgit.com/tangrams/tangram/ea1229690710291caa4490df19404b483206d86c/demos/scene.yaml"
+    "traditional": "traditional.yaml"
 };
 
 var map = L.map('map',

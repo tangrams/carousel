@@ -12,7 +12,7 @@ cameras:
     isometric:
         type: isometric
         axis: [0,1]
- 
+
 lights:
     key:
         type: directional
@@ -187,7 +187,7 @@ layers:
             draw:
                 lines:
                     color: [0.65, 0.65, 0.65]
-                    width: 4              
+                    width: 4
         path:
             filter:
                kind: path
