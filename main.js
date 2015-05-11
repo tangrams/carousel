@@ -1,11 +1,17 @@
 /*** Map ***/
 
+var styles = {
+    "daycycle": "//cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml",
+
+    "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml"
+};
+
 var map = L.map('map',
     {'keyboardZoomOffset': .05}
 );
 
 var layer = Tangram.leafletLayer({
-    scene: 'daycycle.yaml',
+    scene: styles['highways'],
     preUpdate: preUpdate,
     postUpdate: postUpdate,
     attribution: 'Map data &copy; OpenStreetMap contributors'
@@ -16,7 +22,7 @@ window.scene = layer.scene;
 
 layer.addTo(map);
 
-map.setView([40.70531887544228, -74.00976419448853], 15);
+map.setView([40.70531887544228, -74.00976419448853], 13);
 
 var hash = new L.Hash(map);
 
@@ -27,35 +33,22 @@ function resizeMap() {
     map.invalidateSize(false);
 }
 
-var currentStyle = "daycycle";
-
 function switchStyles(style) {
     console.log("style:", style);
     currentStyle = style;
-    switch(style) {
-        case "daycycle":
-            url = style + ".yaml";
-            break;
-        case "highways":
-            url = "https://cdn.rawgit.com/tangrams/highways-demo/fd756b5f7c789f71d26bf62b18b98a7dcb7eb468/scene.yaml"
-            break;
-    }
-    layer.scene.config_source = url;
-    layer.scene.reload();
-    // layer.scene.reload(url);
+    layer.scene.reload(styles[style]);
 }
 
-switchStyles("daycycle");
 
 function preUpdate() {
+}
+
+function postUpdate() {
     switch(currentStyle) {
         case "daycycle":
             daycycle();
             break;
     }
-}
-
-function postUpdate() {
 }
 
 function daycycle() {
@@ -90,5 +83,39 @@ function daycycle() {
     scene.animated = true;
 }
 
+var currentStyle = "daycycle";
+
+switchStyles("highways");
+
+
 window.addEventListener('resize', resizeMap);
 resizeMap();
+
+
+// iFrame integration
+    window.addEventListener("DOMContentLoaded", function() {
+      if (window.self !== window.top) {
+        //sending message that child frame is ready to parent window
+        window.parent.postMessage("loaded", "*");
+        window.addEventListener("message", function(e) {
+          ///** event that happens with parent data
+          console.log("got message:");
+          console.log("*"+e.data+"*");
+
+          switchStyles(e.data);
+
+          // testEvent(e.data);
+        }, false);
+      }else{
+        console.log("not iframed!");
+      }
+    }, false);
+
+
+    //replace this function to real cool one
+    function testEvent(message){
+      console.log("happening");
+      console.log(message);
+      document.getElementsByClassName("testdiv")[0].innerHTML = message;
+    }
+
