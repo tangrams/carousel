@@ -1,7 +1,7 @@
 /*** Map ***/
 
 var styles = {
-    "daycycle": "https://cdn.rawgit.com/tangrams/carousel/cc6f7c0a6c0210b234bb8e6444fc3876ea8d6bff/daynight.yaml",
+    "daycycle": "daynight.yaml",
 
     "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml",
 
@@ -29,7 +29,7 @@ window.scene = layer.scene;
 
 layer.addTo(map);
 
-map.setView([40.70531887544228, -74.00976419448853], 13);
+map.setView([40.7076, -74.0094], 15);
 
 var hash = new L.Hash(map);
 
