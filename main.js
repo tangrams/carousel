@@ -3,7 +3,13 @@
 var styles = {
     "daycycle": "//cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml",
 
-    "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml"
+    "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml",
+
+    "halftone": "https://cdn.rawgit.com/tangrams/shaders-demo/ceff893ece0227b1c04ff8d5ee024c35d2566afc/styles/halftone.yaml",
+
+    "tron": "https://cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
+
+    "traditional": "https://github.com/tangrams/tangram/blob/ea1229690710291caa4490df19404b483206d86c/demos/scene.yaml"
 };
 
 var map = L.map('map',
