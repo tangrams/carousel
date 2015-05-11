@@ -8,9 +8,9 @@ var styles = {
     // "halftone": "https://cdn.rawgit.com/tangrams/carousel/cc6f7c0a6c0210b234bb8e6444fc3876ea8d6bff/halftone.yaml",
     "halftone": "halftone.yaml",
 
-    "tron": "https://cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
+    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
 
-    "traditional": "https://cdn.rawgit.com/tangrams/tangram/ea1229690710291caa4490df19404b483206d86c/demos/scene.yaml"
+    "traditional": "//cdn.rawgit.com/tangrams/tangram/ea1229690710291caa4490df19404b483206d86c/demos/scene.yaml"
 };
 
 var map = L.map('map',
