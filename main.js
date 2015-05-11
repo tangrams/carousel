@@ -5,7 +5,6 @@ var styles = {
 
     "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml",
 
-    // "halftone": "https://cdn.rawgit.com/tangrams/carousel/cc6f7c0a6c0210b234bb8e6444fc3876ea8d6bff/halftone.yaml",
     "halftone": "halftone.yaml",
 
     "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
