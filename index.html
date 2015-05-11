@@ -26,48 +26,51 @@
         }
     </style>
     <style>
+        .leaflet-top {
+            top: 42px;
+        }
         #ui-locator {
             position: absolute;
-            top: 80px;
+            top: 10px;
             left: 10px;
             z-index: 1000;
             pointer-events: none;
+            width: 290px;
+            height: 32px;
         }
         #citylocator {
             pointer-events: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #geolocator {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
         .geolocate-button {
             position: relative;
             background-color: white;
-            width: 26px;
-            height: 26px;
+            width: 32px;
+            height: 32px;
             cursor: pointer;
             text-align: center;
-            line-height: 30px;
             border-radius: 4px;
             box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-            margin-top: 10px;
             pointer-events: auto;
-            font-size: 16px;
             overflow: hidden;
         }
         .geolocate-button.geolocating {
             background-color: #eee;
             color: #777;
         }
-        .geolocate-button.geolocating:hover {
-            background-color: #eee;
-            color: #777;
-        }
-        .geolocate-button:hover {
-            background-color: #f4f4f4;
-        }
         .geolocate-icon {
             display: block;
             position: absolute;
             width: 100%;
             height: 100%;
-            background-size: 80%;
+            background-size: 50%;
             background-position: center center;
             background-repeat: no-repeat;
             background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2215.991%22%20viewBox%3D%220%200%2016%2015.991%22%3E%3Cpath%20fill%3D%22%23454545%22%20d%3D%22M5.962%2010.098l2.68%205.397%206.857-15-15%207.197%205.462%202.406zm.16-.583L1.934%207.672l11.498-5.52L6.12%209.514z%22%2F%3E%3C%2Fsvg%3E);
@@ -76,19 +79,43 @@
             background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2215.991%22%20viewBox%3D%220%200%2016%2015.991%22%3E%3Cpath%20fill%3D%22%23D4645C%22%20d%3D%22M5.962%2010.098l2.682%205.397%206.856-15L.5%207.69%205.962%2010.1zm.162-.584l-4.19-1.842L13.437%202.15%206.124%209.514z%22%2F%3E%3C%2Fsvg%3E);
         }
         .geolocate-icon.geolocating {
-            background-size: 140px; /* size hack */
-            background-image: url(data:image/gif;base64,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);
+            background-image: url(data:image/gif;base64,R0lGODlhQABAAMQRAMLDxPf3+Ojo6eDh4aSlp42PkNHS0/Dw8LO0tcnKy5SWmJyen9nZ2qutrru8vYWHif///////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgARACwAAAAAQABAAAAF/yAkjmRpnmiqrmzrvnAsz3Rt33iu7/xpLI8C4tDjIR5IZEFQzA2SUEXzdUgADAFSAwplTlcG6HJE4CYHX9XBLBVtzQ90GgWAM0RhtmlLmJfNAGRmdyVJc3WDIwEOBUgLciVAC3NrXAVZczR5Sl6ZNAcAAAmYniwMoZClMkdJCKoym0mdTQEJCTOIUIFfiLcxuUm7U6zCL09cs0UBCAikMKxIxa/GocnT19jZ2tvcBgQNqdwoDlCErwPWJwFcbapv0ifHUNNJfSyN9dPELZtj0+hUbDkTR7CgwYMIE9oAhUUhiQH4FgwsQk5BOhZvkBhIIyBJOxh/NKaR9/FFv4k9gE082DiDAQEEF3sIIOKwpk2CAhQ8IICSBQAC8JqofODqV7BMUOyBzDcHmq8SFdPlCtqjFgGWJfqhSEDgqTZgNxl4vAnB5RCyaNOqXfsqBAAh+QQFCgARACwFAAYANAA1AAAF/yAkjmRpnmiqrqUgoEFCNAZrq4PyPMpLHrrdYxG4GUeHgvBRKI4Iyx3geAREHwnSlUc1WqPT0fbRvSWutZEyuigNBmVTYLFskxzoEWBdCLMCCAQEDCWABQoITiQIS354UQg2dEKERwIGDAdIYz4pA1EEcSRnW34on0uhoiJfV6YnB5CrIgZjWSu1O0SzEAFrSwWaLAdvvCMMvztpxl0HgQQInczT1NXWogINDwTS1yxBXN4nAQ0Ky1HiJ6iqEL8F6SaxD5G0a8vwSHAkAQOK+P8AAwocSLAgQQAzuhHMFQ4gOQL6ILQiE5AUO4YKBKJyQAJhA4XwBEQ0SLKkyZMAGUoASOCvIEN6zATouGUDihBqjHYYedTQ2KN3NwJA6UEN0EeU1kSqENDSW052JWzeuyZgiUJUPa/J26Gwqi58j2CWwFMApLUAwqqFAAAh+QQFCgARACwFAAcANQA0AAAF/yAkjmRpisDzKMLpvnAsGqpaBHKun0StDiYGIIHbwRINoqnnA44Ci1qhZTw5agQTTVpE+VbV0/cEKKyoI2YzXBob1TUnW3RVOaqIb2FeMgAMYVA+gHyFTwkAAAeGjDACiYSNfHk1C10kAg0EAJIuWz5ZSzUJnaJfD5cioKVtpw9yaaOsJHA1qRCZBHezI59YvDuUKpbAO49/xcnKy2wBBghJt8wjAlFSVH6L0xDWPjd1U9MDrg8JPpzMKa7qKujL5utbCtK8AuSAB7DMDacL2yYB+GGht+2AgQRo/ilcyLBhiQCI9DVUo63YAQUFGLw4p0xdqBMK4igb98CdiVwmLTkmdMiyJTOJDS8+CBfmEUw27FLqMPOgYiF4Jdnw9MknQA9iADVpPMGgwdJllPa4jOoSQkACT6t2CgEAIfkEBQoAEQAsBQAHADUAMwAABf8gJI5kORrJYYpAUThrLM8j8TyFWhr3bdBAoKD3AJgARGNwuToQE6bEk0ktOW6LgClgexC01TDkMJgJBLHAAMw8AAA68erqaxduBbb8RHyggwNEZXskDX1KQIE9f4QidD1QS3QwjSOKeHGVcgwLDw2MmqGio6SlpksBBgAMp1QCdzdfIlw4rK0lCociUjcKtySXPQQsPQW/ln1eIgewlMcQsD0II2qgxzw9Wc8zbg0Jetvh4uPk5UABCHcKkSMC4LcBnUkj8rbHvH0ql8PPXX1l+7b5E+TogQJrrfARySQuXh9n5dDhQWSuIrUBBgZZNBDtYEVsRHIsccOuUq5k04JLnCy5Z0gyZUF6NNAUjIivIAhwaGz00lObd3seEYw48MEPmghJCGAowgACAg6YykHywF4JBjestjJUJAZViq0EECAgFcIrjxbTngoBACH5BAUKABEALAUABgA0ADUAAAX/ICSOZGmOzqMMZ+u+sGg8dBHfeAvQdO6XDMXCcBrwFCfBQgH4nQIF3uHEICCmpiiN6CQJeA+Wz8hrdkmLWsCpDZ9JgQQA+xM0CIy3fs/v+/8lBwB5gE8IDwuEgVpmhSSHNXQjZA8EjiUEYGJePAiXJA1gAlRWa58iAloOp2OSrK+wsbKztLVPCQQOWAIAXLRpkVBbtJQ0CF80jbE7YJahBa6vyDyrEKa1kIjXtiIDvdvc4eLj5HsHCAQNm9ypYL4kAAXVp6FgNiY8645gPKOYDwXAFWrDQ2CAAQILpWgmLkAmGgui1RIwQB+rOASsSJQVAFgNf3oouqCIsAQzMEj0Tcx4kMCEQzDKHvID2YWZJzgey4yQqUnPgTs0ISTgp0ZEPX4J+fDsCaEYjXmFluYbYaANVIVEabiquNHPgayWuK3ksSBprAMO0iUwiyMEACH5BAUKABEALAUABgA0ADUAAAX/ICSOZEkOhzkeg6C+cCwGy/MYKmM/jOz7gx1B1RD+ji/BrqFC7BDIaMlRWLhMB8VDcZV6v+DwsRUNEB4OsYlmgx4Tu64aYtg95LG6LTUXweNIDgQ4fTMFNguFYgEGPYqPkJGSk5SVhQwAeJZmDwWEEAc2CpYlf50jSqekIwB2JAwNmpVBiKsyAwAAAba8vb6/wMHCjwEJCXwimMirAYedfKmJvKYPACK00ratO9YiALG9qTYDwxADDQ2O5evsXgFObcu9zXadu324APIv8PVuag52FJBVwlm9B3NC2WEi4+COObSMyDBop0DCegxj9LPz70CCXAQhyApoY6APNnYWTdwTQPETK2cO7o0wkGvfiwAAtChAcI9ePXKs6qWRpOPgUBFa6k3aVm/ICIchxUS0cxRCjYqUktpZVpQbJQFaPZlgUENBt0qYDMhsBykEACH5BAUKABEALAUABgA1ADQAAAX/ICSOZGmeaKqubKA8DSvPavLcA63vxv0cKIFgpxIsFsOTAcBAIW4IIgpwA0h9D6nyZpAWbgXtSag1KBRdsXrNbrvf8DhJAADKS4IvIYAKfBV3JQQ+CUE+gSSDVSkABE2IIj0PBXaQMgIDlZabnJ2ecgMADQBJnyUOWA8OpiQ2qQ+PnQwJQC+vC56okwKvh51YVL1Zvz4AC70xnZIKBwy9OZ4H0BAGX2BprCMBDEx82d/gbAwNBAjT309Y2KwDvZpx1Q97JsGphYHWD/ckDb1WgcBMuEoVS84xHCb8pMKFKEACAOfm2JLnLdyAAaXC9UFAgMA/cAp9RNkxrkFBLQN9S2Rk0c5HRCKKAuIZUJFEvQcftaRTRyLAwQfrRNzMKaWljwI1dfl4F5ISm3gPFKyMibBEAAMGaqoJcPEE1QcvPznzwTAcg44ItBIJAQAh+QQFCgARACwAAAAAQABAAAAFTmAkjmRpnmiqrmzrvnAsz3Rt33iu73zv/8CgcEgsGo/IpHLJbDqf0Kh0Sq1ar9isdsvter/gsHhMLpvP6LR6zW673/C4fE6v2+/4vD4SAgA7);
         }
         .citylocate-input-container {
             position: relative;
-            width: 200px;
-            height: 26px;
+            width: 250px;
+            height: 32px;
         }
         .citylocate-input-container input {
-            width: 160px;
+            width: 210px;
         }
         .js-citylocate-select2 {
             width: 100%;
+        }
+        .select2-container {
+            font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+        .select2-container .select2-selection--single {
+            height: 32px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+            border: 0;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 32px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 30px;
+        }
+        .select2-search--dropdown {
+            padding: 0;
+        }
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            border: 0;
+            border-top: 1px solid #e1e1e1;
+            border-bottom: 1px solid #e1e1e1;
+            line-height: 32px;
+            font-size: 16px;
+            padding: 0;
         }
     </style>
   </head>
@@ -99,7 +126,7 @@
         <div id="citylocator">
             <div class="citylocate-input-container">
                 <select class="js-citylocate-select2">
-                    <option disabled>Find a city...</option>
+                    <option disabled selected>Search</option>
                 </select>
             </div>
         </div>

@@ -1,8 +1,22 @@
 // dependencies: jQuery, select2
 var CITY_DATA
+var CITY_DATA_URL = 'https://gist.githubusercontent.com/randymeech/1fb759d34521b43d373d/raw/afba4257c0f4a435b8c6494adf17c5b00c698e5c/cities'
 
-$.get('https://gist.githubusercontent.com/randymeech/e9398d4f6fb827e2294a/raw/', function (data) {
+$.get(CITY_DATA_URL, function (data) {
     CITY_DATA = JSON.parse(data);
+
+    // Process data
+    CITY_DATA = CITY_DATA.map(function (item) {
+        return {
+            name: item.n,
+            lat: item.l.split('/')[0],
+            lng: item.l.split('/')[1],
+            zoom: item.z
+        }
+    })
+
+    // Sort
+    /*
     CITY_DATA.sort(function (a, b) {
         if (a.name < b.name)
             return -1;
@@ -10,6 +24,7 @@ $.get('https://gist.githubusercontent.com/randymeech/e9398d4f6fb827e2294a/raw/',
             return 1;
         return 0;
     });
+    */
 
     $(document).ready(function () {
         var $select = $('.js-citylocate-select2');
@@ -18,7 +33,7 @@ $.get('https://gist.githubusercontent.com/randymeech/e9398d4f6fb827e2294a/raw/',
         })
 
         $select.select2({
-            placeholder: 'Find a city...'
+            placeholder: 'Search'
         });
 
         $select.on('select2:select', function (e) {
