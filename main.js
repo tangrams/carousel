@@ -20,7 +20,7 @@ var layer = Tangram.leafletLayer({
     scene: styles['daycycle'],
     preUpdate: preUpdate,
     postUpdate: postUpdate,
-    attribution: 'Map data &copy; OSM contributors'
+    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
 });
 
 window.layer = layer;

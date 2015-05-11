@@ -35,6 +35,9 @@
     <script src="lib/leaflet-hash.js"></script>
     <!-- End of 3rd party libraries -->
 
+    <!-- Mapzen bug UI component -->
+    <script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/bug.min.js'></script>
+
     <!-- Main tangram library -->
     <script src="https://mapzen.com/tangram/0.1/tangram.min.js"></script>
 
@@ -44,6 +47,17 @@
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
       window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
+    </script>
+
+    <!-- Mapzen bug -->
+    <script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/bug.min.js'></script>
+    <script>
+    var mzBug = new MapzenBug({
+      name: 'Tangram',
+      link: 'https://mapzen.com/projects/tangram',
+      tweet: 'Tangram WebGL map demo from @mapzen',
+      repo: 'https://github.com/tangrams/carousel/'
+    });
     </script>
 
   </body>
