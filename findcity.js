@@ -1,6 +1,6 @@
 // dependencies: jQuery, select2
 var CITY_DATA
-var CITY_DATA_URL = 'https://gist.githubusercontent.com/randymeech/1fb759d34521b43d373d/raw/afba4257c0f4a435b8c6494adf17c5b00c698e5c/cities'
+var CITY_DATA_URL = 'https://gist.githubusercontent.com/randymeech/1fb759d34521b43d373d/raw/3d2d7944ae32d819a17d60a44c6702b4406e6c91/cities'
 
 $.get(CITY_DATA_URL, function (data) {
     CITY_DATA = JSON.parse(data);
@@ -16,7 +16,6 @@ $.get(CITY_DATA_URL, function (data) {
     })
 
     // Sort
-    /*
     CITY_DATA.sort(function (a, b) {
         if (a.name < b.name)
             return -1;
@@ -24,7 +23,6 @@ $.get(CITY_DATA_URL, function (data) {
             return 1;
         return 0;
     });
-    */
 
     $(document).ready(function () {
         var $select = $('.js-citylocate-select2');
