@@ -1,7 +1,7 @@
 /*** Map ***/
 
 var styles = {
-    "daycycle": "//cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml",
+    "daycycle": "//cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daynight.yaml",
 
     "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml",
 
@@ -9,7 +9,7 @@ var styles = {
 
     "tron": "https://cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
 
-    "traditional": "https://github.com/tangrams/tangram/blob/ea1229690710291caa4490df19404b483206d86c/demos/scene.yaml"
+    "traditional": "https://cdn.rawgit.com/tangrams/tangram/ea1229690710291caa4490df19404b483206d86c/demos/scene.yaml"
 };
 
 var map = L.map('map',
@@ -20,7 +20,7 @@ var layer = Tangram.leafletLayer({
     scene: styles['highways'],
     preUpdate: preUpdate,
     postUpdate: postUpdate,
-    attribution: 'Map data &copy; OpenStreetMap contributors'
+    attribution: 'Map data &copy; OSM contributors'
 });
 
 window.layer = layer;
