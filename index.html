@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tangram: WebGL Maps for Vector Tiles</title>
     <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 
     <style>
         body {
@@ -37,9 +38,20 @@
         }
     </style>
   </head>
-
   <body>
     <div id="map"></div>
+    <div id="ui-locator">
+        <div id="citylocator">
+            <div class="citylocate-input-container">
+                <select class="js-citylocate-select2">
+                    <option disabled selected>Search</option>
+                </select>
+            </div>
+        </div>
+        <div id="geolocator">
+            <div class="geolocate-button" title="Get current location"><span class="geolocate-icon"></span></div>
+        </div>
+    </div>
 
     <!-- 3rd party libraries -->
     <script src="lib/leaflet/leaflet.js"></script>
@@ -55,6 +67,11 @@
 
     <!-- Demo module -->
     <script src="main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script src="geolocate.js"></script>
+    <script src="findcity.js"></script>
 
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
