@@ -23,14 +23,17 @@ lights:
 
 styles:
         # Halftone shaders adapted from: http://webstaff.itn.liu.se/~stegu/webglshadertutorial/shadertutorial.html
-    halftone:
+    colorhalftone:
         base: polygons
         shaders:
             uniforms:
-                dot_frequency: 100.4748637184972
-                dot_scale: 2
+                dot_frequency: 100.
+                dot_scale: 1.5
+                true_color: false
+
             blocks:
                 global: |
+
                     // Antialiasing
                     float aastep(float threshold, const float freq, float value) {
                         const float scale = 2.;
@@ -60,19 +63,39 @@ styles:
                     const float dot_wrap = 1000.;
                     st += mod(u_map_position.xy / meter_pixels, dot_wrap) / pixel_scale;
 
-                    // Rotate dot & find nearest dot distance
-                    vec2 st2 = mat2(0.707, -0.707, 0.707, 0.707) * st;
-                    vec2 nearest = dot_scale * fract(zoom_frequency * st2) - 1.0;
-                    float dist = length(nearest);
+                    vec3 white = vec3(0.97);
+                    vec3 black = vec3(0.1);
+
+                    // Perform a rough RGB-to-CMYK conversion
+                    vec4 cmyk;
+                    cmyk.xyz = 1.0 - color.rgb;
+                    cmyk.w = min(cmyk.x, min(cmyk.y, cmyk.z)); // Create K
+                    if (!true_color) {cmyk.xyz -= cmyk.w;} // Subtract K equivalent from CMY
+
+                    // Distance to nearest point in a grid of
+                    // (frequency x frequency) points over the unit square
+                    vec2 Kst = zoom_frequency*mat2(0.707, -0.707, 0.707, 0.707)*st;
+                    vec2 Kuv = dot_scale*fract(Kst)-(dot_scale/2.);
+                    float k = aastep(0.0, zoom_frequency, sqrt(cmyk.w)-length(Kuv));
+                    vec2 Cst = zoom_frequency*mat2(0.966, -0.259, 0.259, 0.966)*st;
+                    vec2 Cuv = dot_scale*fract(Cst)-(dot_scale/2.);
+                    float c = aastep(0.0, zoom_frequency, sqrt(cmyk.x)-length(Cuv));
+                    vec2 Mst = zoom_frequency*mat2(0.966, 0.259, -0.259, 0.966)*st;
+                    vec2 Muv = dot_scale*fract(Mst)-(dot_scale/2.);
+                    float m = aastep(0.0, zoom_frequency, sqrt(cmyk.y)-length(Muv));
+                    vec2 Yst = zoom_frequency*st; // 0 deg
+                    vec2 Yuv = dot_scale*fract(Yst)-(dot_scale/2.);
+                    float y = aastep(0.0, zoom_frequency, sqrt(cmyk.z)-length(Yuv));
+
+                    vec3 rgbscreen = 1.0 - 0.9*vec3(c,m,y); // most saturated color = .9
+                    rgbscreen = mix(rgbscreen, black, 0.85*k); // darkest black = .85
 
                     // Modulate the size of the dots
-                    float radius = clamp(sqrt(1.0 - color.g), 0.001, 1.); // use green channel, clamp to avoid giant dot
+                    //float luminance = (0.299 * color.r + 0.587 * color.g + 0.114 * color.b); // HSP color model
+                    //float radius = clamp(sqrt(1.0 - luminance), 0.001, 1.); // use luminance, clamp to avoid giant dot
 
-                    // Color mix
-                    const vec3 white = vec3(1.0, 1.0, 1.0);
-                    const vec3 black = vec3(0.0, 0.0, 0.0);
-                    // color = mix(black + (color * float(halftone_colored)), white, aastep(radius, zoom_frequency, dist));
-                    color.rgb = mix(black, white, aastep(radius, zoom_frequency, dist));
+                    color.rgb = rgbscreen;
+
 
 layers:
     earth:
@@ -81,6 +104,7 @@ layers:
             layer: earth
         draw:
             polygons:
+                style: colorhalftone
                 order: 0
                 color: [0.175, 0.175, 0.175]
 
@@ -90,6 +114,7 @@ layers:
             layer: landuse
         draw:
             polygons:
+                style: colorhalftone
                 order: 1
                 interactive: true
                 color: [0.5, 0.875, 0.5]
@@ -107,7 +132,7 @@ layers:
             layer: water
         draw:
             polygons:
-                # style: water
+                style: colorhalftone
                 order: 2
                 interactive: true
                 color: [0.5, 0.5, 0.875]
@@ -188,6 +213,7 @@ layers:
             layer: buildings
         draw:
             polygons:
+                style: colorhalftone
                 order: 4
                 interactive: true
                 color: [.6, .6, .6]
