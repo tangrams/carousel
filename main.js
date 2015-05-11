@@ -1,11 +1,11 @@
 /*** Map ***/
 
 var styles = {
-    "daycycle": "//cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daynight.yaml",
+    "daycycle": "https://cdn.rawgit.com/tangrams/carousel/cc6f7c0a6c0210b234bb8e6444fc3876ea8d6bff/daynight.yaml",
 
     "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml",
 
-    "halftone": "https://cdn.rawgit.com/tangrams/shaders-demo/ceff893ece0227b1c04ff8d5ee024c35d2566afc/styles/halftone.yaml",
+    "halftone": "https://cdn.rawgit.com/tangrams/carousel/cc6f7c0a6c0210b234bb8e6444fc3876ea8d6bff/halftone.yaml",
 
     "tron": "https://cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
 
