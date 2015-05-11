@@ -7,7 +7,11 @@ var styles = {
 
     "halftone": "halftone.yaml",
 
-    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
+    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/dac373596f80065d6e77ec4f6fc7c5541fcb3775/styles/tron.yaml",
+
+    "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/dac373596f80065d6e77ec4f6fc7c5541fcb3775/styles/crosshatch.yaml",
+
+    "glitter": "//cdn.rawgit.com/tangrams/tangram-sandbox/dac373596f80065d6e77ec4f6fc7c5541fcb3775/styles/specular-dust.yaml",
 
     "traditional": "traditional.yaml"
 };
