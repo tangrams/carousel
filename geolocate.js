@@ -25,18 +25,6 @@
     }
   }
 
-  var cacheCurrentLocation = function () {
-    var onSuccess = function (position) {
-    latitude = position.coords.latitude
-    longitude = position.coords.longitude
-    }
-
-    // Do nothing if we are unable to do geolocation
-    // No error callback
-
-    getCurrentLocation(onSuccess)
-  }
-
   var onGeolocateSuccess = function (position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
@@ -64,8 +52,4 @@
     e.target.classList.add('geolocating');
     getCurrentLocation(onGeolocateSuccess, onGeolocateError);
   });
-
-  // Requests browser's permission to use
-  // geolocator upon page load, if necessary
-  cacheCurrentLocation()
 })()
