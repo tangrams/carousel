@@ -84,7 +84,6 @@ layers:
         draw:
             polygons:
                 order: 1
-                interactive: true
                 style: flat
         green:
             filter: { kind: [park, graveyard, cemetery, forest, recreation_ground] }
@@ -115,7 +114,6 @@ layers:
                 - { $zoom: { min: 18 } }
         draw:
             polygons:
-                interactive: true
                 style: flat
                 order: 3
                 color: '#9dc3de'
@@ -214,11 +212,6 @@ layers:
                 order: 50
                 color: [.65, .65, .65]
 
-        # turn interactive feature selection on for buildings with names
-        interactive:
-            filter: { name: true }
-            draw: { polygons: { interactive: true } }
-
         # extrude 3d buildings
         extruded:
             filter: { $zoom: { min: 15 } }
@@ -282,7 +275,6 @@ layers:
         draw:
             icons:
                 size: [[13, 12px], [15, 18px]]
-                interactive: true
 
         # add generic icon at high zoom
         generic:
