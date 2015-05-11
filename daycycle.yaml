@@ -4,8 +4,8 @@
 
 sources:
     osm:
-        type: MVT
-        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.mvt
+        type: TopoJSONTiles
+        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
 
 cameras:
     camera1:
