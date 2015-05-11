@@ -30,6 +30,31 @@ var layer = Tangram.leafletLayer({
 window.layer = layer;
 window.scene = layer.scene;
 
+layer.on('init', function() {
+   // everything's good, carry on
+  var currentStyle = "daycycle";
+  switchStyles("daycycle");
+  window.addEventListener('resize', resizeMap);
+  resizeMap();
+}); 
+
+layer.on('error', function(error) {
+  // something went wrong
+  var errorEL = document.createElement('div');
+  errorEL.setAttribute("class", "error-msg");
+     // WebGL not supported (or at least didn't initialize properly!)
+  if (layer.scene && !layer.scene.gl) {
+    var noticeTxt = document.createTextNode("Your browser doesn't support WebGL. Please try with recent Firefox or Chrome, Tangram is totally worth it.");
+    errorEL.appendChild(noticeTxt);
+   }
+   // Something else went wrong, generic error message
+   else {
+    var noticeTxt = document.createTextNode("We are sorry, but something went wrong, please try later.");
+    errorEL.appendChild(noticeTxt);
+   }
+   document.body.appendChild(errorEL);
+}); 
+
 layer.addTo(map);
 
 map.setView([40.7076, -74.0094], 15);
@@ -92,29 +117,18 @@ function daycycle() {
     scene.animated = true;
 }
 
-var currentStyle = "daycycle";
-
-switchStyles("daycycle");
-
-
-window.addEventListener('resize', resizeMap);
-resizeMap();
-
-
 // iFrame integration
-    window.addEventListener("DOMContentLoaded", function() {
-      if (window.self !== window.top) {
-        //sending message that child frame is ready to parent window
-        window.parent.postMessage("loaded", "*");
-        window.addEventListener("message", function(e) {
-          ///** event that happens with parent data
-          // console.log("got message:");
-          // console.log("*"+e.data+"*");
+window.addEventListener("DOMContentLoaded", function() {
 
-          switchStyles(e.data);
-
-        }, false);
-      }else{
-        // console.log("not iframed!");
-      }
+  if (window.self !== window.top) {
+    //disable scroll zoom if it is iframed
+    map.scrollWheelZoom.disable();
+    //sending message that child frame is ready to parent window
+    window.parent.postMessage("loaded", "*");
+    window.addEventListener("message", function(e) {
+      switchStyles(e.data);
     }, false);
+  }else{
+
+    }
+}, false);
