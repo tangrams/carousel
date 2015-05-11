@@ -1,9 +1,15 @@
 /*** Map ***/
 
 var styles = {
-    "daycycle": "//cdn.rawgit.com/tangrams/carousel/72b62123f95a71c705b45a0281a3c1f250796159/daycycle.yaml",
+    "daycycle": "daynight.yaml",
 
-    "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml"
+    "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml",
+
+    "halftone": "halftone.yaml",
+
+    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/1be266e772eff5179c11da9f2ce27458934158a5/styles/tron.yaml",
+
+    "traditional": "traditional.yaml"
 };
 
 var map = L.map('map',
@@ -11,10 +17,10 @@ var map = L.map('map',
 );
 
 var layer = Tangram.leafletLayer({
-    scene: styles['highways'],
+    scene: styles['daycycle'],
     preUpdate: preUpdate,
     postUpdate: postUpdate,
-    attribution: 'Map data &copy; OpenStreetMap contributors'
+    attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
 });
 
 window.layer = layer;
@@ -22,7 +28,7 @@ window.scene = layer.scene;
 
 layer.addTo(map);
 
-map.setView([40.70531887544228, -74.00976419448853], 13);
+map.setView([40.7076, -74.0094], 15);
 
 var hash = new L.Hash(map);
 
@@ -34,7 +40,6 @@ function resizeMap() {
 }
 
 function switchStyles(style) {
-    console.log("style:", style);
     currentStyle = style;
     layer.scene.reload(styles[style]);
 }
@@ -85,7 +90,7 @@ function daycycle() {
 
 var currentStyle = "daycycle";
 
-switchStyles("highways");
+switchStyles("daycycle");
 
 
 window.addEventListener('resize', resizeMap);
