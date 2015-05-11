@@ -5,6 +5,7 @@
   var longitude
 
   if (!map) return false
+  if (window.self !== window.top) return false
 
   var getCurrentLocation = function (success, error) {
     var geolocator = window.navigator.geolocation;
