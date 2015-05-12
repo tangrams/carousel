@@ -16,27 +16,36 @@ var styles = {
     "traditional": "traditional.yaml"
 };
 
+var currentStyle = "daycycle";
+var qs = window.location.search;
+if (qs) {
+    qs = qs.slice(1);
+    if (qs[qs.length-1] === '/') {
+        qs = qs.slice(0, qs.length-1);
+    }
+    if (styles[qs]) {
+        currentStyle = qs;
+    }
+}
+
 var map = L.map('map',
     {'keyboardZoomOffset': .05}
 );
 
 var layer = Tangram.leafletLayer({
-    scene: styles['daycycle'],
+    scene: styles[currentStyle],
     preUpdate: preUpdate,
     postUpdate: postUpdate,
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
 });
 
-window.layer = layer;
-window.scene = layer.scene;
+var scene = layer.scene;
 
 layer.on('init', function() {
    // everything's good, carry on
-  var currentStyle = "daycycle";
-  switchStyles("daycycle");
   window.addEventListener('resize', resizeMap);
   resizeMap();
-}); 
+});
 
 layer.on('error', function(error) {
   // something went wrong
@@ -53,11 +62,21 @@ layer.on('error', function(error) {
     errorEL.appendChild(noticeTxt);
    }
    document.body.appendChild(errorEL);
-}); 
+});
 
 layer.addTo(map);
 
-map.setView([40.7076, -74.0094], 15);
+// leaflet-style URL hash pattern:
+// ?style.yaml#[zoom],[lat],[lng]
+var map_start_location = [40.7076, -74.0094, 15];
+var url_hash = window.location.hash.slice(1).split('/');
+if (url_hash.length === 3) {
+    map_start_location = [url_hash[1],url_hash[2], url_hash[0]];
+    // convert from strings
+    map_start_location = map_start_location.map(Number);
+}
+
+map.setView(map_start_location.slice(0, 2), map_start_location[2]);
 
 var hash = new L.Hash(map);
 
@@ -74,15 +93,19 @@ function switchStyles(style) {
 }
 
 
-function preUpdate() {
-}
+function preUpdate(will_render) {
+    if (!will_render) {
+        return;
+    }
 
-function postUpdate() {
     switch(currentStyle) {
         case "daycycle":
             daycycle();
             break;
     }
+}
+
+function postUpdate() {
 }
 
 function daycycle() {
