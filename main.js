@@ -36,7 +36,7 @@ layer.on('init', function() {
   switchStyles("daycycle");
   window.addEventListener('resize', resizeMap);
   resizeMap();
-}); 
+});
 
 layer.on('error', function(error) {
   // something went wrong
@@ -53,11 +53,21 @@ layer.on('error', function(error) {
     errorEL.appendChild(noticeTxt);
    }
    document.body.appendChild(errorEL);
-}); 
+});
 
 layer.addTo(map);
 
-map.setView([40.7076, -74.0094], 15);
+// leaflet-style URL hash pattern:
+// ?style.yaml#[zoom],[lat],[lng]
+var map_start_location = [40.7076, -74.0094, 15];
+var url_hash = window.location.hash.slice(1).split('/');
+if (url_hash.length === 3) {
+    map_start_location = [url_hash[1],url_hash[2], url_hash[0]];
+    // convert from strings
+    map_start_location = map_start_location.map(Number);
+}
+
+map.setView(map_start_location.slice(0, 2), map_start_location[2]);
 
 var hash = new L.Hash(map);
 
