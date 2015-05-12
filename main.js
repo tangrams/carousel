@@ -150,10 +150,10 @@ window.addEventListener("DOMContentLoaded", function() {
     map.scrollWheelZoom.disable();
     //sending message that child frame is ready to parent window
     window.parent.postMessage("loaded", "*");
-    window.addEventListener("message", function(e) {
+    window.addEventListener("message", function (e) {
+      // Ignore the message if origin is self (this fixes a Safari bug where iframed documents posts messages at itself)
+      if (e.origin === window.location.origin) return;
       switchStyles(e.data);
     }, false);
-  }else{
-
-    }
+  }
 }, false);
