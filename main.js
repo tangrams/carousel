@@ -88,8 +88,10 @@ function resizeMap() {
 }
 
 function switchStyles(style) {
-    currentStyle = style;
-    layer.scene.reload(styles[style]);
+    if (styles[style]) {
+        currentStyle = style;
+        layer.scene.reload(styles[currentStyle]);
+    }
 }
 
 
