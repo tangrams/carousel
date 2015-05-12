@@ -16,24 +16,33 @@ var styles = {
     "traditional": "traditional.yaml"
 };
 
+var currentStyle = "daycycle";
+var qs = window.location.search;
+if (qs) {
+    qs = qs.slice(1);
+    if (qs[qs.length-1] === '/') {
+        qs = qs.slice(0, qs.length-1);
+    }
+    if (styles[qs]) {
+        currentStyle = qs;
+    }
+}
+
 var map = L.map('map',
     {'keyboardZoomOffset': .05}
 );
 
 var layer = Tangram.leafletLayer({
-    scene: styles['daycycle'],
+    scene: styles[currentStyle],
     preUpdate: preUpdate,
     postUpdate: postUpdate,
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
 });
 
-window.layer = layer;
-window.scene = layer.scene;
+var scene = layer.scene;
 
 layer.on('init', function() {
    // everything's good, carry on
-  var currentStyle = "daycycle";
-  switchStyles("daycycle");
   window.addEventListener('resize', resizeMap);
   resizeMap();
 });
