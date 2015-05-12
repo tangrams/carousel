@@ -10,17 +10,10 @@
 
     function _loadExternalStylesheet () {
         var el = document.createElement('link')
-        var firstStylesheet = document.head.querySelectorAll('link, style')[0]
-
         el.setAttribute('rel', 'stylesheet')
         el.setAttribute('type', 'text/css')
         el.setAttribute('href', STYLESHEET)
-
-        if (firstStylesheet !== 'undefined') {
-          document.head.insertBefore(el, firstStylesheet)
-        } else {
-          document.head.appendChild(el)
-        }
+        document.head.appendChild(el)
     }
 
     _loadExternalStylesheet()
