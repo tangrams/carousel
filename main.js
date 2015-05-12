@@ -3,7 +3,7 @@
 var styles = {
     "daycycle": "daynight.yaml",
 
-    "highways": "//cdn.rawgit.com/tangrams/highways-demo/a95a428fad9adcf07df1118c859e317c52e1b5c1/scene.yaml",
+    "highways": "//cdn.rawgit.com/tangrams/highways-demo/e05d4f2afd8072f44908d5c096d5ecde7304c35c/scene.yaml",
 
     "halftone": "halftone.yaml",
 
