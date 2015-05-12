@@ -93,15 +93,19 @@ function switchStyles(style) {
 }
 
 
-function preUpdate() {
-}
+function preUpdate(will_render) {
+    if (!will_render) {
+        return;
+    }
 
-function postUpdate() {
     switch(currentStyle) {
         case "daycycle":
             daycycle();
             break;
     }
+}
+
+function postUpdate() {
 }
 
 function daycycle() {
