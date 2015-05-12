@@ -32,6 +32,8 @@ var map = L.map('map',
     {'keyboardZoomOffset': .05}
 );
 
+map.attributionControl.setPrefix('<a href="http://leafletjs.com" title="A JS library for interactive maps" target="_blank">Leaflet</a>');
+
 var layer = Tangram.leafletLayer({
     scene: styles[currentStyle],
     preUpdate: preUpdate,
