@@ -3,6 +3,7 @@
 }
 #ui-locator {
     position: absolute;
+    display: block;
     top: 10px;
     left: 10px;
     z-index: 1000;
