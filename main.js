@@ -9,7 +9,7 @@ var styles = {
 
     "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/dac373596f80065d6e77ec4f6fc7c5541fcb3775/styles/tron.yaml",
 
-    "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/d94ad04ed07a2d53bbd8d965cba7a7616d426d49/styles/crosshatch.yaml",
+    "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/984f7f26d416cd209c8cd7b487d25dd7524fdaa0/styles/crosshatch.yaml",
 
     "glitter": "//cdn.rawgit.com/tangrams/tangram-sandbox/dac373596f80065d6e77ec4f6fc7c5541fcb3775/styles/specular-dust.yaml",
 
