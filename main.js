@@ -3,15 +3,15 @@
 var styles = {
     "daycycle": "daynight.yaml",
 
-    "highways": "//cdn.rawgit.com/tangrams/highways-demo/e05d4f2afd8072f44908d5c096d5ecde7304c35c/scene.yaml",
+    "highways": "//cdn.rawgit.com/tangrams/highways-demo/9dfe66c50a69bb49af0eda0fa6092df4b42fa6bc/scene.yaml",
 
     "halftone": "halftone.yaml",
 
-    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/dac373596f80065d6e77ec4f6fc7c5541fcb3775/styles/tron.yaml",
+    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/7c30e914b14c9a3959ee3df14ee3198e3715a0b1/styles/tron.yaml",
 
-    "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/984f7f26d416cd209c8cd7b487d25dd7524fdaa0/styles/crosshatch.yaml",
+    "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/7c30e914b14c9a3959ee3df14ee3198e3715a0b1/styles/crosshatch.yaml",
 
-    "glitter": "//cdn.rawgit.com/tangrams/tangram-sandbox/dac373596f80065d6e77ec4f6fc7c5541fcb3775/styles/specular-dust.yaml",
+    "glitter": "//cdn.rawgit.com/tangrams/tangram-sandbox/7c30e914b14c9a3959ee3df14ee3198e3715a0b1/styles/specular-dust.yaml",
 
     "traditional": "traditional.yaml"
 };
