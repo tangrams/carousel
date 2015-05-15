@@ -11,10 +11,14 @@
         .control ul{
             box-sizing:border-box;
             width:100%;
-            margin-top:100px;
+            margin-top:0px;
             padding-left:0px;
         }
 
+        .control ul li{
+            height:48px;
+            line-height: 48px;
+        }
         .control ul li.title{
             content:attr(data-header);
             box-sizing:border-box;
@@ -23,15 +27,12 @@
             list-style:none;
             padding-left: -30px;
             width:100%;
-            height:45px;
-            margin-top:10px;
             /*margin-bottom:10px;*/
             background-color:#fff;
             color:#6EA0A4;
             font-weight:400;
             text-align: center;
             font-family:sans-serif;
-            line-height:45px;
             text-transform : uppercase;
             cursor : pointer;
         }
@@ -61,7 +62,6 @@
             display:block;
             list-style:none;
             width:100%;
-            height:45px;
             left:30px;
            /* margin-bottom:5px;*/
             background-color:rgba(255,255,255,0.9);
@@ -69,7 +69,6 @@
             font-weight:400;
             text-align: center;
             font-family:sans-serif;
-            line-height:45px;
             text-transform : uppercase;
             cursor : pointer;
             margin-left:200px;
@@ -108,3 +107,20 @@
             background-color:#fff;
             color:#666;
         }
+
+        @media (max-width: 768px) {
+
+          .control{
+              width:110px;
+              font-size:14px;
+          }
+          .control ul {
+            margin-top:100px;
+          }
+          .control ul li{
+            height:35px;
+            line-height:35px;
+            margin-bottom:2px;
+          }
+        }
+
