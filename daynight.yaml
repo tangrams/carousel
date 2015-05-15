@@ -1,3 +1,12 @@
+# scene:
+#     animated: true
+#     background:
+
+sources:
+    osm:
+        type: TopoJSONTiles
+        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
+
 cameras:
     camera1:
         type: isometric
@@ -16,11 +25,6 @@ lights:
         direction: [0, 1, -.5]
         diffuse: [0, 0, .5]
         ambient: .2
-
-sources:
-    osm:
-        type: TopoJSONTiles
-        url:  http://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson
 
 styles:
     roads:
@@ -68,9 +72,8 @@ layers:
             not: { kind: ["path", "rail"] }
         draw:
             lines:
-                style: roads
-                order: 3
-                color: gray    
+                order: 4
+                color: gray
                 width: 8
                 cap: round
         highway:
@@ -78,35 +81,35 @@ layers:
                 kind: highway
             draw:
                 lines:
-                    order: 2
-                    color: '#aa6666'
+                    order: 5
+                    color: '#cc6666'
                     width: 12
-                outline:
-                    order: 2
-                    style: lines
-                    color: grey
-                    width: 15
+                    outline:
+                        color: grey
+                        width: 1.5
         minor_road:
             filter:
                 kind: minor_road
             draw:
                 lines:
-                    order: -2
+                    order: 3
                     color: lightgrey
                     width: 5
-    
+
     buildings:
         data: { source: osm }
         draw:
             polygons:
-                style: buildings
-                order: 4
+                order: 6
                 color: |
                     function () {
                         var h = feature.height || 20;
-                        h = Math.min((h + 50)/ 255, .8); // max brightness: .9
-                        h = Math.max(h, .7); // min brightness: .4
+                        h = Math.min((h + 50)/ 255, .8); // max brightness: .8
+                        h = Math.max(h, .4); // min brightness: .4
                         return [h, h, h];
                     }
-                extrude: true
-
+        3d-buildings:
+            filter: { $zoom: { min: 15 } }
+            draw:
+                polygons:
+                    extrude: function () { return feature.height > 20 || $zoom >= 16; }

@@ -10,8 +10,12 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Vector map yeah!</title>
+
+    <title>Tangram: WebGL Maps for Vector Tiles</title>
+
     <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="lib/leaflet-tangram-switcher.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 
     <style>
         body {
@@ -19,11 +23,136 @@
             margin: 0px;
             border: 0px;
             padding: 0px;
+            overflow-x:hidden;
+            overflow-y:hidden;
         }
-
         #map {
             background: rgba(0, 0, 0, 0);
         }
+        .error-msg{
+            position : fixed;
+            width : 300px;
+            margin-left : -150px;
+            top : 50%;
+            left : 50%;
+            padding : 10px;
+            font-size : 16px;
+            text-align : center;
+            color : #666;
+            background-color : #eee;
+            z-index : 1030;
+        }
+        #ui-locator {
+            display : none;
+        }
+        .control{
+            box-sizing : border-box;
+            position : absolute;
+            top : 0px;
+            right : 0px;
+            width : 150px;
+            height : 100%;
+            z-index : 1030;
+            
+        }
+        .control ul{
+            box-sizing:border-box;
+            width:100%;
+            margin-top:100px;
+            padding-left:0px;
+        }
+
+        .control ul li.title{
+            content:attr(data-header);
+            box-sizing:border-box;
+            position:relative;
+            display:block;
+            list-style:none;
+            padding-left: -30px;
+            width:100%;
+            height:45px;
+            margin-top:10px;
+            /*margin-bottom:10px;*/
+            background-color:#fff;
+            color:#6EA0A4;
+            font-weight:400;
+            text-align: center;
+            font-family:sans-serif;
+            line-height:45px;
+            text-transform : uppercase;
+            cursor : pointer;
+            border-bottom:1px solid #666;
+        }
+/*        .control ul li.title:before{
+              content: "";
+              position: absolute;
+              left: -23px;
+              bottom: 0;
+              width: 0;
+              height: 0;
+              border-left : 23px solid transparent;
+              border-top: 23px solid #D4645C;
+              border-bottom: 23px solid #D4645C;
+        }
+*/
+        .control ul li.title:hover {
+            background-color:#6EA0A4;
+            color:#fff;
+        }
+
+
+
+        .control ul li.style {
+            box-sizing:border-box;
+            display:block;
+            list-style:none;
+            width:100%;
+            height:45px;
+            left:30px;
+           /* margin-bottom:5px;*/
+            background-color:rgba(255,255,255,0.9);
+            color:#666;
+            font-weight:400;
+            text-align: center;
+            font-family:sans-serif;
+            line-height:45px;
+            text-transform : uppercase;
+            cursor : pointer;
+            margin-left:200px;
+        }
+        .control ul li.style:nth-child(1){
+            transition: margin 0.1s linear;
+        }
+        .control ul li.style:nth-child(2){
+            transition: margin 0.2s linear;
+        }
+        .control ul li.style:nth-child(3){
+            transition: margin 0.3s linear;
+        }
+        .control ul li.style:nth-child(4){
+            transition: margin 0.4s linear;
+        }
+        .control ul li.style:nth-child(5){
+            transition: margin 0.5s linear;
+        }
+        .control ul li.style:nth-child(6){
+            transition: margin 0.6s linear;
+        }
+        .control ul li.style:nth-child(7){
+            transition: margin 0.7s linear;
+        }
+        .control ul li.style:nth-child(8){
+            transition: margin 0.8s linear;
+        }
+        .control ul li.show{
+            margin-left:0px;
+
+        }
+        .control ul li:hover{
+            background-color : #6EA0A4;
+            color:#fff;
+        }
+
         .testdiv{
             position:absolute;
             top:200px;
@@ -36,9 +165,20 @@
         }
     </style>
   </head>
-
   <body>
     <div id="map"></div>
+    <div id="ui-locator">
+        <div id="citylocator">
+            <div class="citylocate-input-container">
+                <select class="js-citylocate-select2">
+                    <option disabled selected>Search</option>
+                </select>
+            </div>
+        </div>
+        <div id="geolocator">
+            <div class="geolocate-button" title="Get current location"><span class="geolocate-icon"></span></div>
+        </div>
+    </div>
 
     <!-- 3rd party libraries -->
     <script src="lib/leaflet/leaflet.js"></script>
@@ -46,12 +186,23 @@
     <script src="lib/leaflet-hash.js"></script>
     <!-- End of 3rd party libraries -->
 
+    <!-- Mapzen bug UI component -->
+    <script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/bug.min.js'></script>
+
     <!-- Main tangram library -->
-    <script src="https://rawgit.com/tangrams/tangram/8c09d5b88020d62fab09f5a98dc375615f400f36/dist/tangram.min.js"></script>
+    <script src="https://mapzen.com/tangram/0.1/tangram.min.js"></script>
 
     <!-- Demo module -->
-    <script src="main.js"></script>
 
+    <script src="leaflet-tangram-switcher.js"></script>
+    <script src="main.js"></script>
+    <script src="switcher.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+    <script src="geolocate.js"></script>
+    <script src="findcity.js"></script>
+    
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
     window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
@@ -93,5 +244,20 @@
     }
 
     </script>
+
+    <!-- Mapzen bug -->
+    <script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/bug.min.js'></script>
+    
+    <script>
+    var mzBug = new MapzenBug({
+      name: 'Tangram',
+      link: 'https://mapzen.com/projects/tangram',
+      tweet: 'Tangram WebGL map demo from @mapzen',
+      repo: 'https://github.com/tangrams/carousel/'
+    });
+
+    var switcher = new Switcher(switchStyles,["daycycle","highways","halftone","tron","crosshatch","glitter","traditional"]);
+    </script>
+
   </body>
 </html>
