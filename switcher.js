@@ -15,13 +15,12 @@ function Switcher(func, params){
     styleUL.appendChild(titleLI);
     
     titleLI.addEventListener('click',function(e){
-
+        titleLI.classList.toggle('bottom-line');
         var style = document.querySelectorAll('li.style');
         var len = style.length;
         var i =0;
         for( i =0; i<len; i++){
-          console.log("hew");
-          style[i].classList.toggle("show");
+          style[i].classList.toggle('show');
         }
     });
 
