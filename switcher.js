@@ -15,16 +15,15 @@ function Switcher(func, params){
     styleUL.appendChild(titleLI);
     
     titleLI.addEventListener('click',function(e){
-        var style = document.querySelectorAll('li.style');
-        var len = style.length;
-        var i =0;
-        for( i =0; i<len; i++){
-          style[i].classList.toggle('show');
-        }
+      var style = document.querySelectorAll('li.style');
+      var len = style.length;
+      var i =0;
+      for( i =0; i<len; i++){
+        style[i].classList.toggle('show');
+      }
     });
 
     params.forEach(function(styleName,index){
-
       var styleLI = document.createElement('li');
       var styleTxt = document.createTextNode(styleName);
       styleLI.appendChild(styleTxt);
@@ -38,14 +37,14 @@ function Switcher(func, params){
     });
     switcherEL.appendChild(styleUL);
     document.body.appendChild(switcherEL);
-   }
+  }
 
    function removeActiveClass(){
       var style = document.querySelectorAll('li.style');
-        var len = style.length;
-        var i =0;
-        for( i =0; i<len; i++){
+      var len = style.length;
+      var i =0;
+      for( i =0; i<len; i++){
           style[i].classList.remove('active');
-        }
+      }
    }
 }
