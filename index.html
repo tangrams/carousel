@@ -94,9 +94,10 @@
               border-bottom: 23px solid #D4645C;
         }
 */
-        .control ul li.title:hover {
-            background-color:#6EA0A4;
-            color:#fff;
+        .control ul li.style:hover {
+            box-shadow: inset 0 -4px 0 #6EA0A4;
+            background-color:#fff;
+            color:#666;
         }
 
 
@@ -118,6 +119,7 @@
             text-transform : uppercase;
             cursor : pointer;
             margin-left:200px;
+            transition: box-shadow 160ms ease-in-out, background-color 160ms linear;
         }
         .control ul li.style:nth-child(1){
             transition: margin 0.1s linear;
@@ -147,10 +149,16 @@
             margin-left:0px;
 
         }
-        .control ul li:hover{
+        .control ul li.style.active{
+            box-shadow: inset 0 -4px 0 #6EA0A4;
+            background-color:#fff;
+            color:#666;
+        }
+
+/*        .control ul li:hover{
             background-color : #6EA0A4;
             color:#fff;
-        }
+        }*/
         .bottom-line{
             border-bottom:1px solid #666;
         }
