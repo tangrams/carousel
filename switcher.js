@@ -15,7 +15,6 @@ function Switcher(func, params){
     styleUL.appendChild(titleLI);
     
     titleLI.addEventListener('click',function(e){
-        titleLI.classList.toggle('bottom-line');
         var style = document.querySelectorAll('li.style');
         var len = style.length;
         var i =0;
@@ -32,10 +31,21 @@ function Switcher(func, params){
       styleLI.className = 'style';
       styleLI.addEventListener('click',function(e){
         func(styleName);
+        removeActiveClass();
+        styleLI.classList.add('active');
       });
       styleUL.appendChild(styleLI);
     });
     switcherEL.appendChild(styleUL);
     document.body.appendChild(switcherEL);
+   }
+
+   function removeActiveClass(){
+      var style = document.querySelectorAll('li.style');
+        var len = style.length;
+        var i =0;
+        for( i =0; i<len; i++){
+          style[i].classList.remove('active');
+        }
    }
 }
