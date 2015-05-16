@@ -11,8 +11,6 @@ cameras:
     camera1:
         type: isometric
         axis: [1, 1]
-        # focal_length: 2
-        # vanishing_point: [-250, -250] # relative to center of screen, in pixels
 
 lights:
     sun:
@@ -25,6 +23,38 @@ lights:
         direction: [0, 1, -.5]
         diffuse: [0, 0, .5]
         ambient: .2
+
+scene:
+    properties:
+        speed: 10000
+    update: |
+        function daycycle() {
+            var t = +new Date() / properties.speed;
+
+            var x = Math.sin(t);
+            var y = Math.sin(t+(3.14159/2)); // 1/4 offset
+            var px = Math.min(x, 0); // positive x
+            var py = Math.min(y, 0); // positive y
+
+            camera.axis = {x: x, y: y};
+
+            // offset blue and red for sunset and moonlight effect
+            var B = x + Math.abs(Math.sin(t+(3.14159*.5)))/4;
+            var R = y + Math.abs(Math.sin(t*2))/4;
+            lights.sun.diffuse = [R, y, B, 1];
+            lights.sun.direction = [x, 1, -.5];
+
+            // light up the roads at night
+            styles.roads.material.emission.amount = [-py, -py, -py, 1];
+
+            // turn water black at night
+            styles.water.material.ambient.amount = [py+1, py+1, py+1, 1];
+            styles.water.material.diffuse.amount = [py+1, py+1, py+1, 1];
+
+            // turn up buildings ambient response at night
+            var ba = -py*.75+.75;
+            styles.buildings.material.ambient.amount = [ba, ba, ba, 1];
+        }
 
 styles:
     roads:

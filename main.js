@@ -36,8 +36,6 @@ map.attributionControl.setPrefix('<a href="http://leafletjs.com" title="A JS lib
 
 var layer = Tangram.leafletLayer({
     scene: styles[currentStyle],
-    preUpdate: preUpdate,
-    postUpdate: postUpdate,
     attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
 });
 
@@ -94,54 +92,6 @@ function switchStyles(style) {
         currentStyle = style;
         layer.scene.reload(styles[currentStyle]);
     }
-}
-
-
-function preUpdate(will_render) {
-    if (!will_render) {
-        return;
-    }
-
-    switch(currentStyle) {
-        case "daycycle":
-            daycycle();
-            break;
-    }
-}
-
-function postUpdate() {
-}
-
-function daycycle() {
-    d = new Date();
-    t = d.getTime()/10000;
-
-    x = Math.sin(t);
-    y = Math.sin(t+(3.14159/2)); // 1/4 offset
-    z = Math.sin(t+(3.14159)); // 1/2 offset
-
-    scene.camera.axis = {x: x, y: y};
-
-    // offset blue and red for sunset and moonlight effect
-    B = x + Math.abs(Math.sin(t+(3.14159*.5)))/4;
-    R = y + Math.abs(Math.sin(t*2))/4;
-
-    scene.lights.sun.diffuse = [R, y, B, 1];
-    scene.lights.sun.direction = [x, 1, -.5];
-
-    px = Math.min(x, 0); // positive x
-    py = Math.min(y, 0); // positive y
-    // light up the roads at night
-    scene.styles["roads"].material.emission.amount = [-py, -py, -py, 1];
-    // turn water black at night
-    scene.styles["water"].material.ambient.amount = [py+1, py+1, py+1, 1];
-    scene.styles["water"].material.diffuse.amount = [py+1, py+1, py+1, 1];
-
-    // turn up buildings' ambient response at night
-    ba = -py*.75+.75;
-    scene.styles["buildings"].material.ambient.amount = [ba, ba, ba, 1];
-
-    scene.animated = true;
 }
 
 // iFrame integration
