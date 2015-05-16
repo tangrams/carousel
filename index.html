@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
     <link rel="stylesheet" href="lib/leaflet-tangram-switcher.css" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="switcher.css" />
     <style>
         body {
             position:relative;
@@ -44,123 +44,6 @@
         }
         #ui-locator {
             display : none;
-        }
-        .control{
-            box-sizing : border-box;
-            position : absolute;
-            top : 0px;
-            right : 0px;
-            width : 150px;
-            height : 100%;
-            z-index : 1030;
-            
-        }
-        .control ul{
-            box-sizing:border-box;
-            width:100%;
-            margin-top:100px;
-            padding-left:0px;
-        }
-
-        .control ul li.title{
-            content:attr(data-header);
-            box-sizing:border-box;
-            position:relative;
-            display:block;
-            list-style:none;
-            padding-left: -30px;
-            width:100%;
-            height:45px;
-            margin-top:10px;
-            /*margin-bottom:10px;*/
-            background-color:#fff;
-            color:#6EA0A4;
-            font-weight:400;
-            text-align: center;
-            font-family:sans-serif;
-            line-height:45px;
-            text-transform : uppercase;
-            cursor : pointer;
-        }
-/*        .control ul li.title:before{
-              content: "";
-              position: absolute;
-              left: -23px;
-              bottom: 0;
-              width: 0;
-              height: 0;
-              border-left : 23px solid transparent;
-              border-top: 23px solid #D4645C;
-              border-bottom: 23px solid #D4645C;
-        }
-*/
-        .control ul li.style:hover {
-            box-shadow: inset 0 -4px 0 #6EA0A4;
-            background-color:#fff;
-            color:#666;
-        }
-
-
-
-        .control ul li.style {
-            box-sizing:border-box;
-            display:block;
-            list-style:none;
-            width:100%;
-            height:45px;
-            left:30px;
-           /* margin-bottom:5px;*/
-            background-color:rgba(255,255,255,0.9);
-            color:#666;
-            font-weight:400;
-            text-align: center;
-            font-family:sans-serif;
-            line-height:45px;
-            text-transform : uppercase;
-            cursor : pointer;
-            margin-left:200px;
-            transition: box-shadow 160ms ease-in-out, background-color 160ms linear;
-        }
-        .control ul li.style:nth-child(1){
-            transition: margin 0.1s linear;
-        }
-        .control ul li.style:nth-child(2){
-            transition: margin 0.2s linear;
-        }
-        .control ul li.style:nth-child(3){
-            transition: margin 0.3s linear;
-        }
-        .control ul li.style:nth-child(4){
-            transition: margin 0.4s linear;
-        }
-        .control ul li.style:nth-child(5){
-            transition: margin 0.5s linear;
-        }
-        .control ul li.style:nth-child(6){
-            transition: margin 0.6s linear;
-        }
-        .control ul li.style:nth-child(7){
-            transition: margin 0.7s linear;
-        }
-        .control ul li.style:nth-child(8){
-            transition: margin 0.8s linear;
-        }
-        .control ul li.show{
-            margin-left:0px;
-
-        }
-        .control ul li.style.active{
-            box-shadow: inset 0 -4px 0 #6EA0A4;
-            background-color:#fff;
-            color:#666;
-        }
-
-/*        .control ul li:hover{
-            background-color : #6EA0A4;
-            color:#fff;
-        }*/
-        .bottom-line{
-            border-bottom:1px solid #666;
         }
 
         .testdiv{
@@ -266,7 +149,7 @@
       repo: 'https://github.com/tangrams/carousel/'
     });
 
-    var switcher = new Switcher(switchStyles,["daycycle","highways","halftone","tron","crosshatch","glitter","traditional"]);
+    var switcher = new Switcher(switchStyles,getStyleArray());
     </script>
 
   </body>
