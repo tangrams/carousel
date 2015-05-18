@@ -15,7 +15,7 @@ function Switcher(func, params){
     styleUL.appendChild(titleLI);
     
     titleLI.addEventListener('click',function(e){
-      titleLI.classList.add('active');
+      titleLI.classList.toggle('active');
       var style = document.querySelectorAll('li.style');
       var len = style.length;
       var i =0;
