@@ -13,6 +13,7 @@ function Switcher(func, params,cStyle){
     titleLI.appendChild(titleTxt);
     titleLI.className = 'title';
     styleUL.appendChild(titleLI);
+    console.log(titleLI.offsetBottom);
     
     titleLI.addEventListener('click',function(e){
       titleLI.classList.toggle('active');
@@ -32,6 +33,7 @@ function Switcher(func, params,cStyle){
       if(styleName == cStyle){
         styleLI.classList.add('active');
       }
+      styleLI.style.cssText = 'top: ' + ((index+1) * 48) + 'px';
       styleLI.addEventListener('click',function(e){
         func(styleName);
         removeActiveClass();
