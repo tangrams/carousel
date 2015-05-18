@@ -32,6 +32,7 @@ function Switcher(func, params,cStyle){
       if(styleName == cStyle){
         styleLI.classList.add('active');
       }
+      styleLI.style.cssText = 'top: ' + ((index+1) * 48) + 'px';
       styleLI.addEventListener('click',function(e){
         func(styleName);
         removeActiveClass();
