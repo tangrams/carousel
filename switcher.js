@@ -13,6 +13,7 @@ function Switcher(func, params,cStyle){
     titleLI.appendChild(titleTxt);
     titleLI.className = 'title';
     styleUL.appendChild(titleLI);
+    console.log(titleLI.offsetBottom);
     
     titleLI.addEventListener('click',function(e){
       titleLI.classList.toggle('active');
