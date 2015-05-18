@@ -16,15 +16,6 @@ var styles = {
     "traditional": "traditional.yaml"
 };
 
-function getStyleArray(){
-  var stylesArr = [];
-  for( name in styles){
-    stylesArr.push(name);
-  }
-  return stylesArr;
-}
-
-
 var currentStyle = "daycycle";
 var qs = window.location.search;
 if (qs) {
@@ -152,6 +143,19 @@ function daycycle() {
 
     scene.animated = true;
 }
+
+function getStyleArray(){
+  var stylesArr = [];
+  for( name in styles){
+    stylesArr.push(name);
+  }
+  return stylesArr;
+}
+
+function getCurrentStyle(){
+  return currentStyle;
+}
+
 
 // iFrame integration
 window.addEventListener("DOMContentLoaded", function() {
