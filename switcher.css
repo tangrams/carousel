@@ -35,7 +35,7 @@
             font-family:Arial,sans-serif;
             text-transform : uppercase;
             cursor : pointer;
-            box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+            transition : box-shadow 160ms linear;
         }
 /*    mekes block as flag shape       
  .control ul li.title:before{
