@@ -1,4 +1,4 @@
-function Switcher(func, params){
+function Switcher(func, params,cStyle){
   if (window.self == window.top) {
     var eventFunction = func;
     var eventParams = params;
@@ -29,6 +29,9 @@ function Switcher(func, params){
       var styleTxt = document.createTextNode(styleName);
       styleLI.appendChild(styleTxt);
       styleLI.className = 'style';
+      if(styleName == cStyle){
+        styleLI.classList.add('active');
+      }
       styleLI.addEventListener('click',function(e){
         func(styleName);
         removeActiveClass();
