@@ -144,6 +144,19 @@ function daycycle() {
     scene.animated = true;
 }
 
+function getStyleArray(){
+  var stylesArr = [];
+  for( name in styles){
+    stylesArr.push(name);
+  }
+  return stylesArr;
+}
+
+function getCurrentStyle(){
+  return currentStyle;
+}
+
+
 // iFrame integration
 window.addEventListener("DOMContentLoaded", function() {
 
