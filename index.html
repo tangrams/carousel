@@ -53,10 +53,13 @@
             background-color:#fff;
             color:#000;
         }
-        /* Hide zoom control when below a certain size, which interferes with demo parent container overlay */
+        /* Hide zoom control on touch devices or move it when below a certain size, which interferes with demo parent container overlay */
+        .leaflet-touch .leftlet-control-zoom {
+            display: none;
+        }
         @media only screen and (max-width: 768px) {
-            .leaflet-zoom-control {
-                display: none;
+            .mapzen-demo-iframed .leaflet-top {
+              top: 50px;
             }
         }
     </style>
@@ -82,6 +85,10 @@
 
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
+    if (window.self !== window.top) {
+        document.documentElement.className += ' mapzen-demo-iframed';
+    }
+
     window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
 
     initializeIframeEvent();
