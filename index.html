@@ -86,7 +86,7 @@
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
     if (window.self !== window.top) {
-        html.className += ' mapzen-demo-iframed';
+        document.documentElement.className += ' mapzen-demo-iframed';
     }
 
     window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
