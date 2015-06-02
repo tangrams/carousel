@@ -17,47 +17,38 @@
     <link rel="stylesheet" href="switcher.css" />
     <style>
         body {
-            width:100%;
-            height:100%;
-            position:relative;
+            width: 100%;
+            height: 100%;
+            position: relative;
             margin: 0px;
             border: 0px;
             padding: 0px;
-            overflow-x:hidden;
-            overflow-y:hidden;
+            overflow-x: hidden;
+            overflow-y: hidden;
         }
         #map {
             background: rgba(0, 0, 0, 0);
         }
-        .error-msg{
-            position : fixed;
-            width : 300px;
-            margin-left : -150px;
-            top : 50%;
-            left : 50%;
-            padding : 10px;
-            font-size : 16px;
-            text-align : center;
-            color : #666;
-            background-color : #eee;
-            z-index : 1030;
+        .error-msg {
+            position: fixed;
+            width: 300px;
+            margin-left: -150px;
+            top: 50%;
+            left: 50%;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            color: #666;
+            background-color: #eee;
+            z-index: 1030;
         }
 
-        .testdiv{
-            position:absolute;
-            top:200px;
-            left:50px;
-            width:200px;
-            height:200px;
-            z-index:1000;
-            background-color:#fff;
-            color:#000;
-        }
         /* Hide zoom control on touch devices or move it when below a certain size, which interferes with demo parent container overlay */
         .leaflet-touch .leftlet-control-zoom {
             display: none;
         }
-        @media only screen and (max-width: 768px) {
+        @media (max-width: 752px) {
+            /* 767px - 15px for scrollbar */
             .mapzen-demo-iframed .leaflet-top {
               top: 50px;
             }
@@ -85,58 +76,20 @@
 
     <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
-    if (window.self !== window.top) {
-        document.documentElement.className += ' mapzen-demo-iframed';
-    }
+        if (window.self !== window.top) {
+            document.documentElement.className += ' mapzen-demo-iframed';
+        }
 
-    window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
+        window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
 
-    initializeIframeEvent();
+        MPZN.bug({
+          name: 'Tangram',
+          link: 'https://mapzen.com/projects/tangram',
+          tweet: 'Tangram WebGL map demo from @mapzen',
+          repo: 'https://github.com/tangrams/carousel/'
+        });
 
-    window.addEventListener("DOMContentLoaded", function() {
-      if (window.self !== window.top) {
-        //sending message that child frame is ready to parent window
-        window.parent.postMessage("loaded", "*");
-        window.addEventListener("message", function(e) {
-          ///** event that happens with parent data
-          console.log("got message");
-          testEvent(e.data);
-        }, false);
-      }else{
-        console.log("not iframed!");
-      }
-    }, false);
-
-
-
-    function initializeIframeEvent(){
-      if (window.self !== window.top) {
-        //what happens if it is iframed?
-        var el = document.createElement('div');
-        el.className = 'testdiv';
-        el.innerHTML = "HI I am ugly text in ugly box";
-        document.body.appendChild(el);
-      }
-    }
-
-
-    //replace this function to real cool one
-    function testEvent(message){
-      console.log("happening");
-      console.log(message);
-      document.getElementsByClassName("testdiv")[0].innerHTML = message;
-    }
-
-    </script>
-    <script>
-    MPZN.bug({
-      name: 'Tangram',
-      link: 'https://mapzen.com/projects/tangram',
-      tweet: 'Tangram WebGL map demo from @mapzen',
-      repo: 'https://github.com/tangrams/carousel/'
-    });
-
-    var switcher = new Switcher(switchStyles,getStyleArray(),getCurrentStyle());
+        var switcher = new Switcher(switchStyles,getStyleArray(),getCurrentStyle());
     </script>
 
   </body>
