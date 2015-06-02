@@ -53,6 +53,12 @@
             background-color:#fff;
             color:#000;
         }
+        /* Hide zoom control when below a certain size, which interferes with demo parent container overlay */
+        @media only screen and (max-width: 768px) {
+            .leaflet-zoom-control {
+                display: none;
+            }
+        }
     </style>
   </head>
   <body>
