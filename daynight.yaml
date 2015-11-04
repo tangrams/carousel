@@ -69,7 +69,7 @@ layers:
     roads:
         data: { source: osm }
         filter:
-            not: { kind: ["path", "rail"] }
+            not: { kind: [path, rail, ferry] }
         draw:
             lines:
                 order: 4

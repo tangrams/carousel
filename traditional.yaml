@@ -121,7 +121,7 @@ layers:
     roads:
         data: { source: osm }
         filter:
-            not: { kind: [rail] }
+            not: { kind: [rail, ferry] }
         draw:
             lines:
                 style: flat_lines
@@ -230,7 +230,7 @@ layers:
 
     road_labels:
         data: { source: osm, layer: roads }
-        filter: { name: true, aeroway: false, tunnel: false, railway: false, not: { kind: rail } }
+        filter: { name: true, aeroway: false, tunnel: false, railway: false, not: { kind: [rail, ferry] } }
 
         highway:
             filter: { kind: highway, $zoom: { min: 7 } }
