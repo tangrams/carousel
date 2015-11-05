@@ -238,8 +238,9 @@ layers:
                 text:
                     font:
                         fill: '#666'
-                        # size: 12pt
-                        typeface: 100 12px Helvetica
+                        weight: 100
+                        size: 12px
+                        family: Helvetica
                         stroke: { color: white, width: 4 }
 
         not_highway:
@@ -249,21 +250,27 @@ layers:
                     font:
                         fill: '#666'
                         stroke: { color: white, width: 4 }
-                        typeface: 100 12px Helvetica
+                        weight: 100
+                        size: 12px
+                        family: Helvetica
 
             major_road:
                 filter: { kind: major_road, $zoom: { min: 14 } }
                 draw:
                     text:
                         font:
-                            typeface: 100 16px Helvetica
+                            weight: 100
+                            size: 16px
+                            family: Helvetica
                             stroke: { color: white, width: 4 }
             minor_road:
                 filter: { kind: minor_road, railway: false, $zoom: { min: 15 } }
                 draw:
                     text:
                         font:
-                            typeface: 100 12px Helvetica
+                            weight: 100
+                            size: 12px
+                            family: Helvetica
                             stroke: { color: white, width: 4 }
             small:
                 filter: { highway: [residential, unclassified], $zoom: { max: 15 } }
@@ -317,7 +324,9 @@ layers:
         draw:
             text:
                 font:
-                    typeface: italic 12pt Helvetica
+                    style: italic
+                    size: 12pt
+                    family: Helvetica
                     fill: black
                     stroke: { color: white, width: 3 }
         minor-places:
@@ -338,6 +347,8 @@ layers:
         draw:
             text:
                 font:
-                    typeface: Italic 10pt Lucida Grande
+                    style: Italic
+                    size: 10pt
+                    family: Lucida Grande
                     fill: darkgreen
                     stroke: { color: white, width: 3 }
