@@ -51,7 +51,7 @@ styles:
         shaders:
             blocks:
                 color: |
-                    color.rgb = vec3(min((v_world_position.z*.0005 + .65),.8));
+                    color.rgb = vec3(min((worldPosition().z*.0005 + .65),.8));
 
     icons:
         base: points
