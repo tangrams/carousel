@@ -3,17 +3,14 @@
 var styles = {
     "daycycle": "daynight.yaml",
 
-    "highways": "//cdn.rawgit.com/tangrams/highways-demo/9dfe66c50a69bb49af0eda0fa6092df4b42fa6bc/scene.yaml",
-
-    "halftone": "halftone.yaml",
-
-    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/7c30e914b14c9a3959ee3df14ee3198e3715a0b1/styles/tron.yaml",
+    "cinnabar": "//cdn.rawgit.com/tangrams/cinnabar-style/commit/70b3d2d9ca70346ad626b4337aa676735e1ba71b/cinnabar-style.yaml",
 
     "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/7c30e914b14c9a3959ee3df14ee3198e3715a0b1/styles/crosshatch.yaml",
 
-    "glitter": "//cdn.rawgit.com/tangrams/tangram-sandbox/7c30e914b14c9a3959ee3df14ee3198e3715a0b1/styles/specular-dust.yaml",
+    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/a5d9eb117a4b5a220cb23c02a79ef7d002caf071/styles/tron.yaml",
 
-    "traditional": "traditional.yaml"
+    "refill": "//cdn.rawgit.com/tangrams/cinnabar-style/commit/f2f3dbccb9482ec58296d523bef9095f366f6ce3/refill-style.yaml",
+
 };
 
 var currentStyle = "daycycle";
