@@ -9,7 +9,7 @@ var styles = {
 
     "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/a5d9eb117a4b5a220cb23c02a79ef7d002caf071/styles/tron.yaml",
 
-    "refill": "//cdn.rawgit.com/tangrams/refill-style/857e1439ae947057bdcfaea7b5eb958628dc7c26/refill-style.yaml",
+    "refill": "//cdn.rawgit.com/tangrams/refill-style/6e720243dfc93f2aa49d490e0676699edfe4aad7/refill-style.yaml",
 
 };
 
