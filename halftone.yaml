@@ -108,7 +108,7 @@ layers:
         draw:
             polygons:
                 style: halftone_polys
-                order: 0
+                order: function() { return feature.sort_key; }
                 color: [0.175, 0.175, 0.175]
 
     landuse:
@@ -118,7 +118,7 @@ layers:
         draw:
             polygons:
                 style: halftone_polys
-                order: 1
+                order: function() { return feature.sort_key; }
                 interactive: true
                 color: [0.5, 0.875, 0.5]
         pitch:
@@ -127,7 +127,6 @@ layers:
             draw:
                 polygons:
                     color: [0.3, 0.675, 0.3]
-                    order: 2
 
     water:
         data:
@@ -136,11 +135,12 @@ layers:
         draw:
             polygons:
                 style: halftone_polys
-                order: 3
+                order: function() { return feature.sort_key; }
                 interactive: true
                 color: [0.5, 0.5, 0.875]
             outline:
                 style: lines
+                order: 352 # magic
                 color: [0.6, 0.6, 0.975]
                 width: |
                     function () {
@@ -158,10 +158,11 @@ layers:
         draw:
             lines:
                 style: halftone_lines
-                order: function () { return feature.sort_key + 4; }
+                order: function () { return feature.sort_key; }
                 interactive: function () { return ($zoom >= 18); }
             outline:
                 style: lines
+                order: 352 # magic
                 color: [0.7, 0.7, 0.7]
                 width: 1
         highway:
@@ -218,7 +219,7 @@ layers:
         draw:
             polygons:
                 style: halftone_polys
-                order: 50
+                order: function() { return feature.sort_key; }
                 interactive: true
                 color: [.6, .6, .6]
                 extrude: function () { return (($zoom >= 15 && feature.height > 20) || $zoom >= 16) }
