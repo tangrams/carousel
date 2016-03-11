@@ -117,7 +117,7 @@ function daycycle() {
     y = Math.sin(t+(3.14159/2)); // 1/4 offset
     z = Math.sin(t+(3.14159)); // 1/2 offset
 
-    scene.camera.axis = {x: x, y: y};
+    scene.view.camera.axis = {x: x, y: y};
 
     // offset blue and red for sunset and moonlight effect
     B = x + Math.abs(Math.sin(t+(3.14159*.5)))/4;
