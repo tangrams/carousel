@@ -3,13 +3,13 @@
 var styles = {
     "daycycle": "daynight.yaml",
 
-    "cinnabar": "//cdn.rawgit.com/tangrams/cinnabar-style/70b3d2d9ca70346ad626b4337aa676735e1ba71b/cinnabar-style.yaml",
+    "cinnabar": "//cdn.rawgit.com/tangrams/cinnabar-style/v2.0.0/cinnabar-style.yaml",
 
     "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/5b6963f1efce4ba153b55294db26cf2d8caec77d/styles/crosshatch.yaml",
 
     "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/a5d9eb117a4b5a220cb23c02a79ef7d002caf071/styles/tron.yaml",
 
-    "refill": "//cdn.rawgit.com/tangrams/refill-style/6e720243dfc93f2aa49d490e0676699edfe4aad7/refill-style.yaml",
+    "refill": "//cdn.rawgit.com/tangrams/refill-style/v2.0.0/refill-style.yaml"
 
 };
 
