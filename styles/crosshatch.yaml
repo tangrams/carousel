@@ -56,7 +56,7 @@ styles:
         mix: tiling-texture-zoom-fade 
         shaders:
             uniforms:
-                    u_hatch: https://cdn.rawgit.com/tangrams/tangram-sandbox/gh-pages/styles/imgs/hatch_0.png
+                    u_hatch: images/hatch_0.png
             blocks:
                 color: |
                     float pattern = 1.0-TileTexture(u_hatch,3.).a;
@@ -67,13 +67,13 @@ styles:
         mix: earth-hatch
         shaders:
             uniforms:
-                    u_hatch: https://cdn.rawgit.com/tangrams/tangram-sandbox/gh-pages/styles/imgs/hatch_2.png
+                    u_hatch: images/hatch_2.png
     paper:
         base: polygons
         texcoords: true
         material:
             normal:
-                texture: https://cdn.rawgit.com/tangrams/tangram-sandbox/gh-pages/styles/imgs/normal-0031.jpg
+                texture: images/normal-0031.jpg
                 mapping: planar
                 scale: 0.001
             ambient: 1.
@@ -145,7 +145,7 @@ styles:
             diffuse: 1.
         shaders:
             uniforms:
-                u_hatchmap: https://cdn.rawgit.com/tangrams/tangram-sandbox/gh-pages/styles/imgs/hatch-0002.png
+                u_hatchmap: images/hatch-0002.png
             blocks:
                 position: |
                     position.z *= max(1.0,0.5+(1.0-(u_map_position.z/20.0))*5.0);
