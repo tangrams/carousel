@@ -1,15 +1,15 @@
 /*** Map ***/
 
 var styles = {
-    "daycycle": "daynight.yaml",
+    "daycycle": "styles/daynight.yaml",
 
-    "cinnabar": "//cdn.rawgit.com/tangrams/cinnabar-style/v2.0.0/cinnabar-style.yaml",
+    "cinnabar": "styles/cinnabar-style.yaml",
 
-    "crosshatch": "//cdn.rawgit.com/tangrams/tangram-sandbox/5b6963f1efce4ba153b55294db26cf2d8caec77d/styles/crosshatch.yaml",
+    "crosshatch": "styles/crosshatch.yaml",
 
-    "tron": "//cdn.rawgit.com/tangrams/tangram-sandbox/a5d9eb117a4b5a220cb23c02a79ef7d002caf071/styles/tron.yaml",
+    "tron": "styles/tron.yaml",
 
-    "refill": "//cdn.rawgit.com/tangrams/refill-style/v2.0.0/refill-style.yaml"
+    "refill": "styles/refill-style.yaml"
 
 };
 
