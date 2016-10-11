@@ -3,13 +3,13 @@
 var styles = {
     "daycycle": "styles/daynight.yaml",
 
-    "cinnabar": "styles/cinnabar-style.yaml",
+    "cinnabar": "https://mapzen.com/carto/cinnabar-style/3/cinnabar-style.yaml",
 
     "crosshatch": "styles/crosshatch.yaml",
 
-    "tron": "styles/tron.yaml",
+    "cinnabar": "https://mapzen.com/carto/tron/3/tron.yaml",
 
-    "refill": "styles/refill-style.yaml"
+    "terrain": "styles/terrain.yaml"
 
 };
 
