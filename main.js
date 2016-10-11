@@ -123,7 +123,7 @@ function daycycle() {
     B = x + Math.abs(Math.sin(t+(3.14159*.5)))/4;
     R = y + Math.abs(Math.sin(t*2))/4;
 
-    scene.lights.sun.diffuse = [R, y, B, 1];
+    scene.lights.sun.diffuse = [R, y, B];
     scene.lights.sun.direction = [x, 1, -.5];
 
     px = Math.min(x, 0); // positive x
