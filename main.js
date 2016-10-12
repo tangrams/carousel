@@ -7,10 +7,17 @@ var styles = {
 
     "crosshatch": "styles/crosshatch.yaml",
 
-    "cinnabar": "https://mapzen.com/carto/tron/3/tron.yaml",
+    "tron": "https://mapzen.com/carto/tron-style/tron.yaml",
 
-    "terrain": "styles/terrain.yaml"
+    "terrain": "styles/imhof2.yaml"
 
+};
+var locations = {
+    "daycycle": [40.7076,-74.0094,15],
+    "cinnabar": [32.7840,-96.7912,14],
+    "crosshatch": [41.91265,12.51977,16],
+    "tron": [40.70553,-74.01398,17.5],
+    "terrain": [37.8861,-122.1391,12]
 };
 
 var currentStyle = "daycycle";
@@ -90,6 +97,7 @@ function switchStyles(style) {
     if (styles[style]) {
         currentStyle = style;
         layer.scene.reload(styles[currentStyle]);
+        map.setView(locations[currentStyle].slice(0, 2), locations[currentStyle][2]);
     }
 }
 
