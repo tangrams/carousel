@@ -1,19 +1,13 @@
-# scene:
-#     animated: true
-#     background:
-
 sources:
     osm:
         type: TopoJSON
-        url:  https://vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
+        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson?api_key=mapzen-QF1osLn
         max_zoom: 16
 
 cameras:
     camera1:
         type: isometric
         axis: [1, 1]
-        # focal_length: 2
-        # vanishing_point: [-250, -250] # relative to center of screen, in pixels
 
 lights:
     sun:
@@ -49,14 +43,14 @@ layers:
         data: { source: osm }
         draw:
             polygons:
-                order: function() { return feature.sort_key; }
+                order: function() { return feature.sort_rank; }
                 color: '#ddeeee'
 
     landuse:
         data: { source: osm }
         draw:
             polygons:
-                order: function() { return feature.sort_key; }
+                order: function() { return feature.sort_rank; }
                 color: '#aaddaa'
 
     water:
@@ -64,7 +58,7 @@ layers:
         draw:
             polygons:
                 style: water
-                order: function() { return feature.sort_key; }
+                order: function() { return feature.sort_rank; }
                 color: '#88bbee'
 
     roads:
@@ -73,7 +67,7 @@ layers:
             not: { kind: [path, rail, ferry] }
         draw:
             lines:
-                order: function() { return feature.sort_key; }
+                order: function() { return feature.sort_rank; }
                 color: gray
                 width: 8
                 cap: round
@@ -100,7 +94,7 @@ layers:
         data: { source: osm }
         draw:
             polygons:
-                order: function() { return feature.sort_key; }
+                order: function() { return feature.sort_rank; }
                 color: |
                     function () {
                         var h = feature.height || 20;

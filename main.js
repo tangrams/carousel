@@ -3,14 +3,21 @@
 var styles = {
     "daycycle": "styles/daynight.yaml",
 
-    "cinnabar": "styles/cinnabar-style.yaml",
+    "cinnabar": "https://mapzen.com/carto/cinnabar-style/3/cinnabar-style.yaml",
 
     "crosshatch": "styles/crosshatch.yaml",
 
-    "tron": "styles/tron.yaml",
+    "tron": "https://mapzen.com/carto/tron-style/tron.yaml",
 
-    "refill": "styles/refill-style.yaml"
+    "terrain": "styles/imhof2.yaml"
 
+};
+var locations = {
+    "daycycle": [40.7076,-74.0094,15],
+    "cinnabar": [32.7840,-96.7912,14],
+    "crosshatch": [40.7053,-74.0109,16],
+    "tron": [40.70553,-74.01398,17.5],
+    "terrain": [37.8861,-122.1391,12]
 };
 
 var currentStyle = "daycycle";
@@ -90,6 +97,7 @@ function switchStyles(style) {
     if (styles[style]) {
         currentStyle = style;
         layer.scene.reload(styles[currentStyle]);
+        map.setView(locations[currentStyle].slice(0, 2), locations[currentStyle][2]);
     }
 }
 
@@ -123,7 +131,7 @@ function daycycle() {
     B = x + Math.abs(Math.sin(t+(3.14159*.5)))/4;
     R = y + Math.abs(Math.sin(t*2))/4;
 
-    scene.lights.sun.diffuse = [R, y, B, 1];
+    scene.lights.sun.diffuse = [R, y, B];
     scene.lights.sun.direction = [x, 1, -.5];
 
     px = Math.min(x, 0); // positive x
