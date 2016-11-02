@@ -53,6 +53,11 @@ styles:
     fadepolys:
         base: polygons
         blend: add
+
+scene:
+    background:
+        color: "#859f9b"
+
 layers:
     terrain:
         data: { source: normals, layer: _default }
