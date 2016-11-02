@@ -2,16 +2,12 @@
 
 var styles = {
     "daycycle": "styles/daynight.yaml",
-
     "cinnabar": "https://mapzen.com/carto/cinnabar-style/3/cinnabar-style.yaml",
-
     "crosshatch": "styles/crosshatch.yaml",
-
     "tron": "https://mapzen.com/carto/tron-style/tron.yaml",
-
     "terrain": "styles/imhof2.yaml"
-
 };
+
 var locations = {
     "daycycle": [40.7076,-74.0094,15],
     "cinnabar": [32.7840,-96.7912,14],
@@ -21,6 +17,7 @@ var locations = {
 };
 
 var currentStyle = "daycycle";
+// http://localhost:8080/?terrain
 var qs = window.location.search;
 if (qs) {
     qs = qs.slice(1);
