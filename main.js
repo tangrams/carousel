@@ -93,7 +93,7 @@ function resizeMap() {
 function switchStyles(style) {
     if (styles[style]) {
         currentStyle = style;
-        layer.scene.reload(styles[currentStyle]);
+        layer.scene.load(styles[currentStyle]);
         map.setView(locations[currentStyle].slice(0, 2), locations[currentStyle][2]);
     }
 }
