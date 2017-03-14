@@ -4,7 +4,7 @@ var styles = {
     "daycycle": "styles/daynight.yaml",
     "cinnabar": "https://mapzen.com/carto/cinnabar-style/3/cinnabar-style.yaml",
     "crosshatch": "styles/crosshatch.yaml",
-    "tron": "https://mapzen.com/carto/tron-style/tron.yaml",
+    "tron": "https://mapzen.com/carto/tron-style/2/tron.yaml",
     "terrain": "styles/imhof2.yaml"
 };
 
