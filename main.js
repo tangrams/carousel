@@ -2,7 +2,7 @@
 
 var styles = {
     "daycycle": "styles/daynight.yaml",
-    "cinnabar": "https://mapzen.com/carto/cinnabar-style/3/cinnabar-style.yaml",
+    "walkabout": "https://mapzen.com/carto/walkabout-style/4/walkabout-style.yaml",
     "crosshatch": "styles/crosshatch.yaml",
     "tron": "https://mapzen.com/carto/tron-style/2/tron.yaml",
     "terrain": "styles/imhof2.yaml"
@@ -10,7 +10,7 @@ var styles = {
 
 var locations = {
     "daycycle": [40.7076,-74.0094,15],
-    "cinnabar": [32.7840,-96.7912,14],
+    "walkabout": [37.7717,-122.4485,14],
     "crosshatch": [40.7053,-74.0109,16],
     "tron": [40.70553,-74.01398,17.5],
     "terrain": [37.8861,-122.1391,12]
@@ -98,6 +98,21 @@ function switchStyles(style) {
     }
 }
 
+var api_key = 'mapzen-PvCT6iP';
+
+// ensure there's an api key
+scene.subscribe({
+    load(event) {
+        // Modify the scene config object here. This mutates the original scene
+        // config object directly and will not be returned. Tangram does not expect
+        // the object to be passed back, and will render with the mutated object.
+        injectAPIKey(event.config, api_key);
+
+    }
+
+});
+
+
 
 function preUpdate(will_render) {
     if (!will_render) {
@@ -174,3 +189,61 @@ window.addEventListener("DOMContentLoaded", function() {
     }, false);
   }
 }, false);
+
+// API key enforcement
+
+// regex to detect a mapzen.com url
+var URL_PATTERN = /((https?:)?\/\/(vector|tile).mapzen.com([a-z]|[A-Z]|[0-9]|\/|\{|\}|\.|\||:)+(topojson|geojson|mvt|png|tif|gz))/;
+
+// 
+function isValidMapzenApiKey(string) {
+  return (typeof string === 'string' && string.match(/[-a-z]+-[0-9a-zA-Z_-]{7}/));
+}
+
+function injectAPIKey(config, apiKey) {
+    var didInjectKey = false;
+
+    Object.keys(config.sources).forEach((key) => {
+
+        var value = config.sources[key];
+        var valid = false;
+
+        // Only operate on the URL if it's a Mapzen-hosted vector tile service
+        if (!value.url.match(URL_PATTERN)) return;
+
+        // Check for valid API keys in the source.
+        // First, check theurl_params.api_key field
+        // Tangram.js compatibility note: Tangram >= v0.11.7 fires the `load`
+        // event after `global` property substitution, so we don't need to manually
+        // check global properties here.
+        if (value.url_params && value.url_params.api_key &&
+            isValidMapzenApiKey(value.url_params.api_key)) {
+            valid = true;
+        // Next, check if there is an api_key param in the query string
+        } else if (value.url.match(/(\?|&)api_key=[-a-z]+-[0-9a-zA-Z_-]{7}/)) {
+            valid = true;
+        }
+
+        if (!valid) {
+            // Add a default API key as a url_params setting.
+            // Preserve existing url_params if present.
+            var params = Object.assign({}, config.sources[key].url_params, {
+                api_key: apiKey
+            });
+
+            // turn off overlays for walkabout
+            var params2 = Object.assign({}, config.global, {
+                sdk_bike_overlay : false,
+                sdk_path_overlay : false
+            });
+
+            // Mutate the original on purpose.
+            config.sources[key].url_params = params;
+            config.global = params2;
+
+            didInjectKey = true;
+        }
+    });
+
+    return didInjectKey;
+}
