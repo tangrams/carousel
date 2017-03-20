@@ -183,7 +183,7 @@ styles:
                 position: |
                     position.z *= max(1.0,0.5+(1.0-(u_map_position.z/20.0))*5.0);
 sources:
-    osm:
+    mapzen:
         type: TopoJSON
         url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
         url_params:
@@ -191,25 +191,25 @@ sources:
 
 layers:
     earth:
-        data: { source: osm }
+        data: { source: mapzen }
         draw:
             earth-hatch:
                 order: 0
                 color: [[14,[1.,1.,1.]],[18,[1.,1.,1.]]]
     landuse:
-        data: { source: osm }
+        data: { source: mapzen }
         draw:
             landuse-hatch:
                 order: 1
                 color: [0.302,0.302,0.306]
     water:
-        data: { source: osm }
+        data: { source: mapzen }
         draw:
             paper:
                 order: 2
                 color: '#343434'
     roads:
-        data: { source: osm }
+        data: { source: mapzen }
         filter: { not: [ highway: service, kind: [rail, ferry] ] }
         draw:
             ink-lines:
@@ -217,7 +217,7 @@ layers:
                 color: '#343434'
                 width: 8
     buildings:
-        data: { source: osm }
+        data: { source: mapzen }
         draw:
             buildings:
                 order: 4
@@ -233,7 +233,7 @@ layers:
                     extrude: true
                     color: [0.217,0.217,0.217]
     places:
-        data: { source: osm }
+        data: { source: mapzen }
         filter: { name: true }
         draw:
             text:
@@ -244,7 +244,7 @@ layers:
                     fill: black
                     stroke: { color: [0.976,0.953,0.890] , width: 7 }
     landuse_labels:
-        data: { source: osm }
+        data: { source: mapzen }
         filter: { name: true, kind: park, $zoom: { min: 16 } }
         draw:
             text:
