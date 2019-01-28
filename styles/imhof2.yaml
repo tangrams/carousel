@@ -116,7 +116,8 @@ layers:
                 fadetext:
                     buffer: 10px
                     font:
-                        size: function() {return 30 - (20 - $zoom)}
+                        # size: function() {return 30 - (20 - $zoom)}
+                        size: 12px
                         family: Lucida Grande
                         fill: function() {return [1, 1, 1, $zoom/15.];}
                         stroke:
@@ -131,7 +132,8 @@ layers:
                 text:
                     font:
                         transform: uppercase
-                        size: function() {return 40 - feature.scalerank * 2 - (20 - $zoom) }
+                        # size: function() {return 40 - feature.scalerank * 2 - (20 - $zoom) }
+                        size: 12px
                         family: Lucida Grande
                         fill: white
                         stroke:
@@ -150,7 +152,8 @@ layers:
                     text:
                         optional: false
                         font:
-                            size: function() {return 30 - feature.scalerank * 1 - (10 - $zoom)}
+                            # size: function() {return 30 - feature.scalerank * 1 - (10 - $zoom)}
+                            size: 12px
                             family: Lucida Grande
                             fill: white
                             stroke:
@@ -165,7 +168,8 @@ layers:
                     priority: 3
                     font:
                         transform: uppercase
-                        size: function() {return 40 - feature.scalerank * 2 - (20 - $zoom) }
+                        # size: function() {return 40 - feature.scalerank * 2 - (20 - $zoom) }
+                        size: 12px
                         family: Lucida Grande
                         fill: white
                         stroke:
