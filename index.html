@@ -71,24 +71,8 @@
     <script src="main.js"></script>
     <script src="switcher.js"></script>
 
-    <!-- Mapzen map UI components -->
-    <script src='//mapzen.com/common/ui/mapzen-ui.min.js'></script>
 
-    <!-- Adding a script block to post message to the parent container (think iframed demos) -->
     <script type="text/javascript">
-        if (window.self !== window.top) {
-            document.documentElement.className += ' mapzen-demo-iframed';
-        }
-
-        window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
-
-        MPZN.bug({
-          name: 'Tangram',
-          link: 'https://mapzen.com/projects/tangram',
-          tweet: 'Tangram WebGL map demo from @mapzen',
-          repo: 'https://github.com/tangrams/carousel/'
-        });
-
         var switcher = new Switcher(switchStyles,getStyleArray(),getCurrentStyle());
     </script>
 

@@ -17,7 +17,7 @@ var locations = {
 };
 
 var currentStyle = "daycycle";
-// http://localhost:8080/?terrain
+
 var qs = window.location.search;
 if (qs) {
     qs = qs.slice(1);
@@ -32,8 +32,6 @@ if (qs) {
 var map = L.map('map',
     {'keyboardZoomOffset': .05}
 );
-
-map.attributionControl.setPrefix('<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
 var layer = Tangram.leafletLayer({
     scene: styles[currentStyle],
@@ -57,12 +55,12 @@ layer.on('error', function(error) {
   errorEL.setAttribute("class", "error-msg");
      // WebGL not supported (or at least didn't initialize properly!)
   if (layer.scene && !layer.scene.gl) {
-    var noticeTxt = document.createTextNode("Your browser doesn't support WebGL. Please try with recent Firefox or Chrome, Tangram is totally worth it.");
+    var noticeTxt = document.createTextNode("Tangram says WebGL didn't initialize properly! Your browser may not support it.");
     errorEL.appendChild(noticeTxt);
    }
    // Something else went wrong, generic error message
    else {
-    var noticeTxt = document.createTextNode("We are sorry, but something went wrong, please try later.");
+    var noticeTxt = document.createTextNode("Tangram says something went wrong! Our apologies.");
     errorEL.appendChild(noticeTxt);
    }
    document.body.appendChild(errorEL);
@@ -70,18 +68,11 @@ layer.on('error', function(error) {
 
 layer.addTo(map);
 
-// leaflet-style URL hash pattern:
-// ?style.yaml#[zoom],[lat],[lng]
-var map_start_location = [40.7076, -74.0094, 15];
-var url_hash = window.location.hash.slice(1).split('/');
-if (url_hash.length === 3) {
-    map_start_location = [url_hash[1],url_hash[2], url_hash[0]];
-    // convert from strings
-    map_start_location = map_start_location.map(Number);
+function setLocation(style) {
+    map.setView(locations[style].slice(0, 2), locations[style][2]);
 }
 
-map.setView(map_start_location.slice(0, 2), map_start_location[2]);
-
+setLocation(currentStyle);
 var hash = new L.Hash(map);
 
 // Resize map to window
@@ -95,7 +86,7 @@ function switchStyles(style) {
     if (styles[style]) {
         currentStyle = style;
         layer.scene.load(styles[currentStyle]);
-        map.setView(locations[currentStyle].slice(0, 2), locations[currentStyle][2]);
+        setLocation(currentStyle);
     }
 }
 
@@ -108,22 +99,23 @@ scene.subscribe({
         // config object directly and will not be returned. Tangram does not expect
         // the object to be passed back, and will render with the mutated object.
         injectAPIKey(event.config, api_key);
-
     }
 
 });
 
-
+var daycycleTimer = null;
 
 function preUpdate(will_render) {
     if (!will_render) {
         return;
     }
 
-    switch(currentStyle) {
-        case "daycycle":
-            daycycle();
-            break;
+    if (currentStyle == "daycycle") {
+        if (daycycleTimer == null) {
+            daycycleTimer = setInterval(daycycle, 100);
+        }
+    } else {
+        clearInterval(daycycleTimer);
     }
 }
 
@@ -131,6 +123,7 @@ function postUpdate() {
 }
 
 function daycycle() {
+    if (currentStyle !== "daycycle") return;
     d = new Date();
     t = d.getTime()/10000;
 

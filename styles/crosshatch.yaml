@@ -53,7 +53,7 @@ styles:
     earth-hatch:
         base: polygons
         lighting: false
-        mix: tiling-texture-zoom-fade 
+        mix: tiling-texture-zoom-fade
         shaders:
             uniforms:
                     u_hatch: images/hatch_0.png
@@ -80,7 +80,7 @@ styles:
             diffuse: 1.
     tools:
         shaders:
-            blocks: 
+            blocks:
                 global: |
                     // Coord System
                     //================================

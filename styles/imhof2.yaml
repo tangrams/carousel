@@ -80,18 +80,19 @@ layers:
         data: { source: nextzen}
         filter:
             kind: [city]
-        draw:
-            text:
-                font:
-                    fill: white
-                    size: 16px
-                    stroke: { color: '#444', width: 4px}
+        # draw:
+        #     text:
+        #         font:
+        #             fill: white
+        #             size: 16px
+        #             stroke: { color: '#444', width: 4px}
     boundaries:
         data: { source: nextzen }
         draw:
             dots:
                 color: [.75, .75, .75]
                 width: 1px
+                order: 4
     water:
         data: { source: nextzen }
         draw:
