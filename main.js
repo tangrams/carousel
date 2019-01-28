@@ -48,6 +48,7 @@ layer.on('init', function() {
    // everything's good, carry on
   window.addEventListener('resize', resizeMap);
   resizeMap();
+  scene.requestRedraw();
 });
 
 layer.on('error', function(error) {
@@ -158,7 +159,7 @@ function daycycle() {
     ba = -py*.75+.75;
     scene.styles["buildings"].material.ambient.amount = [ba, ba, ba, 1];
 
-    scene.animated = true;
+    scene.requestRedraw();
 }
 
 function getStyleArray(){
