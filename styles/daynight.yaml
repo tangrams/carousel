@@ -1,9 +1,9 @@
 sources:
-    mapzen:
+    nextzen:
         type: TopoJSON
-        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
+        url:  https://tile.nextzen.org/tilezen/vector/v1/all/{z}/{x}/{y}.topojson
         url_params:
-            api_key: mapzen-tDHBHDp
+            api_key: tsINU1vsQnKLU1jjCimtVw
         max_zoom: 16
 
 cameras:
@@ -42,21 +42,21 @@ styles:
 
 layers:
     earth:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             polygons:
                 order: function() { return feature.sort_rank; }
                 color: '#ddeeee'
 
     landuse:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             polygons:
                 order: function() { return feature.sort_rank; }
                 color: '#aaddaa'
 
     water:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             polygons:
                 style: water
@@ -64,7 +64,7 @@ layers:
                 color: '#88bbee'
 
     roads:
-        data: { source: mapzen }
+        data: { source: nextzen }
         filter:
             not: { kind: [path, rail, ferry] }
         draw:
@@ -93,7 +93,7 @@ layers:
                     width: 5
 
     buildings:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             polygons:
                 order: function() { return feature.sort_rank; }

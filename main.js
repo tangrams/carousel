@@ -2,9 +2,9 @@
 
 var styles = {
     "daycycle": "styles/daynight.yaml",
-    "walkabout": "https://mapzen.com/carto/walkabout-style/4/walkabout-style.yaml",
+    "walkabout": "https://www.nextzen.org/carto/walkabout-style/8/walkabout-style.zip",
     "crosshatch": "styles/crosshatch.yaml",
-    "tron": "https://mapzen.com/carto/tron-style/2/tron.yaml",
+    "tron": "https://www.nextzen.org/carto/tron-style/6/tron-style.zip",
     "terrain": "styles/imhof2.yaml"
 };
 
@@ -99,7 +99,7 @@ function switchStyles(style) {
     }
 }
 
-var api_key = 'mapzen-PvCT6iP';
+var api_key = '3XqXMjEdT2StnrIRJ4HYbg';
 
 // ensure there's an api key
 scene.subscribe({
@@ -194,9 +194,9 @@ window.addEventListener("DOMContentLoaded", function() {
 // API key enforcement
 
 // regex to detect a mapzen.com url
-var URL_PATTERN = /((https?:)?\/\/(vector|tile).mapzen.com([a-z]|[A-Z]|[0-9]|\/|\{|\}|\.|\||:)+(topojson|geojson|mvt|png|tif|gz))/;
+var URL_PATTERN = /((https?:)?\/\/(vector|tile).nextzen.org([a-z]|[A-Z]|[0-9]|\/|\{|\}|\.|\||:)+(topojson|geojson|mvt|png|tif|gz))/;
 
-// 
+
 function isValidMapzenApiKey(string) {
   return (typeof string === 'string' && string.match(/[-a-z]+-[0-9a-zA-Z_-]{7}/));
 }

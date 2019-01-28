@@ -1,17 +1,17 @@
 sources:
-    mapzen:
+    nextzen:
         type: TopoJSON
-        url:  https://tile.mapzen.com/mapzen/vector/v1/all/{z}/{x}/{y}.topojson
+        url:  https://tile.nextzen.org/tilezen/vector/v1/all/{z}/{x}/{y}.topojson
         url_params:
-            api_key: mapzen-tDHBHDp
+            api_key: tsINU1vsQnKLU1jjCimtVw
         max_zoom: 16
         rasters: [normals]
     normals:
         type: Raster
-        url: https://tile.mapzen.com/mapzen/terrain/v1/normal/{z}/{x}/{y}.png
+        url: https://tile.nextzen.org/tilezen/terrain/v1/normal/{z}/{x}/{y}.png
         url_params:
-            api_key: mapzen-tDHBHDp
-        max_zoom: 15
+            api_key: tsINU1vsQnKLU1jjCimtVw
+        max_zoom: 14
 
 styles:
     terrain-envmap:
@@ -69,7 +69,7 @@ layers:
             terrain-envmap:
                 order: 0
     earth:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             lines:
                 order: 2
@@ -77,7 +77,7 @@ layers:
                 width: 1px
 
     places:
-        data: { source: mapzen}
+        data: { source: nextzen}
         filter:
             kind: [city]
         draw:
@@ -87,13 +87,13 @@ layers:
                     size: 16px
                     stroke: { color: '#444', width: 4px}
     boundaries:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             dots:
                 color: [.75, .75, .75]
                 width: 1px
     water:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             fadeterrain:
                 color: white
@@ -103,7 +103,7 @@ layers:
                 color: [.3, .3, .3]
                 width: .3px
     roads:
-        data: { source: mapzen }
+        data: { source: nextzen }
         draw:
             fadelines:
                 order: 3
@@ -122,7 +122,7 @@ layers:
                             color: function() {return [0, 0, 0, $zoom/15.];}
                             width: 1px
     places:
-        data: { source: mapzen }
+        data: { source: nextzen }
         filter: { not: { kind: [neighbourhood] } }
         countries:
             filter: { kind: country }
@@ -171,7 +171,7 @@ layers:
                             color: black
                             width: 2px
     buildings:
-        data: {source: mapzen}
+        data: {source: nextzen}
         draw:
             fadelines:
                 order: 10
