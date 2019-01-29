@@ -47,6 +47,7 @@ layer.on('init', function() {
   window.addEventListener('resize', resizeMap);
   resizeMap();
   scene.requestRedraw();
+  scene.immediateRedraw();
 });
 
 layer.on('error', function(error) {
@@ -83,10 +84,23 @@ function resizeMap() {
 }
 
 function switchStyles(style) {
+    console.log('style:', style);
     if (styles[style]) {
+        function loadStyle(style) {
+            layer.scene.load(styles[style]).then(() => {
+                layer.scene.updateConfig();
+                console.log('path:',layer.scene.config_source)
+                console.log('currentStyle:',currentStyle);
+                console.log('styles[style]:',styles[style]);
+                if (layer.scene.config_source !== styles[style]) {
+                    loadStyle(style);
+                    console.log("ಠ_ಠ")
+                }
+            });
+        };
+        loadStyle(style);
         currentStyle = style;
-        layer.scene.load(styles[currentStyle]);
-        setLocation(currentStyle);
+        setLocation(style);
     }
 }
 
@@ -99,6 +113,13 @@ scene.subscribe({
         // config object directly and will not be returned. Tangram does not expect
         // the object to be passed back, and will render with the mutated object.
         injectAPIKey(event.config, api_key);
+        if (currentStyle == "daycycle") {
+            if (daycycleTimer == null) {
+                daycycleTimer = setInterval(daycycle, 100);
+            }
+        }
+        scene.requestRedraw();
+        scene.immediateRedraw();
     }
 
 });
@@ -116,6 +137,7 @@ function preUpdate(will_render) {
         }
     } else {
         clearInterval(daycycleTimer);
+        daycycleTimer = null;
     }
 }
 
@@ -195,49 +217,24 @@ function isValidMapzenApiKey(string) {
 }
 
 function injectAPIKey(config, apiKey) {
-    var didInjectKey = false;
 
     Object.keys(config.sources).forEach((key) => {
 
-        var value = config.sources[key];
-        var valid = false;
+        // Add a default API key as a url_params setting.
+        // Preserve existing url_params if present.
+        var params = Object.assign({}, config.sources[key].url_params, {
+            api_key: apiKey
+        });
 
-        // Only operate on the URL if it's a Mapzen-hosted vector tile service
-        if (!value.url.match(URL_PATTERN)) return;
+        // turn off overlays for walkabout
+        var params2 = Object.assign({}, config.global, {
+            sdk_bike_overlay : false,
+            sdk_path_overlay : false
+        });
 
-        // Check for valid API keys in the source.
-        // First, check theurl_params.api_key field
-        // Tangram.js compatibility note: Tangram >= v0.11.7 fires the `load`
-        // event after `global` property substitution, so we don't need to manually
-        // check global properties here.
-        if (value.url_params && value.url_params.api_key &&
-            isValidMapzenApiKey(value.url_params.api_key)) {
-            valid = true;
-        // Next, check if there is an api_key param in the query string
-        } else if (value.url.match(/(\?|&)api_key=[-a-z]+-[0-9a-zA-Z_-]{7}/)) {
-            valid = true;
-        }
+        // Mutate the original on purpose.
+        config.sources[key].url_params = params;
+        config.global = params2;
 
-        if (!valid) {
-            // Add a default API key as a url_params setting.
-            // Preserve existing url_params if present.
-            var params = Object.assign({}, config.sources[key].url_params, {
-                api_key: apiKey
-            });
-
-            // turn off overlays for walkabout
-            var params2 = Object.assign({}, config.global, {
-                sdk_bike_overlay : false,
-                sdk_path_overlay : false
-            });
-
-            // Mutate the original on purpose.
-            config.sources[key].url_params = params;
-            config.global = params2;
-
-            didInjectKey = true;
-        }
     });
-
-    return didInjectKey;
 }

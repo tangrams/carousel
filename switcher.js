@@ -1,8 +1,5 @@
 function Switcher(func, params,cStyle){
   if (window.self == window.top) {
-    var eventFunction = func;
-    var eventParams = params;
-    var width = 0;
 
     var switcherEL = document.createElement('div');
     switcherEL.className = "control";
@@ -13,7 +10,7 @@ function Switcher(func, params,cStyle){
     titleLI.appendChild(titleTxt);
     titleLI.className = 'title';
     styleUL.appendChild(titleLI);
-    
+
     titleLI.addEventListener('click',function(e){
       titleLI.classList.toggle('active');
       var style = document.querySelectorAll('li.style');
