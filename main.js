@@ -84,24 +84,20 @@ function resizeMap() {
 }
 
 function switchStyles(style) {
-    console.log('style:', style);
-    if (styles[style]) {
-        function loadStyle(style) {
-            layer.scene.load(styles[style]).then(() => {
-                layer.scene.updateConfig();
-                console.log('path:',layer.scene.config_source)
-                console.log('currentStyle:',currentStyle);
-                console.log('styles[style]:',styles[style]);
-                if (layer.scene.config_source !== styles[style]) {
+    if (!styles[style]) return false;
+    function loadStyle(style) {
+        layer.scene.load(styles[style]).then(() => {
+            if (layer.scene.config_source !== styles[style]) {
+                scene.updateConfig().then(() => {
                     loadStyle(style);
-                    console.log("ಠ_ಠ")
-                }
-            });
-        };
-        loadStyle(style);
-        currentStyle = style;
-        setLocation(style);
-    }
+                    return false;
+                });
+            }
+            setLocation(style);
+        });
+    };
+    loadStyle(style);
+    currentStyle = style;
 }
 
 var api_key = '3XqXMjEdT2StnrIRJ4HYbg';
