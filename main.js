@@ -100,7 +100,7 @@ function switchStyles(style) {
     currentStyle = style;
 }
 
-var api_key = '3XqXMjEdT2StnrIRJ4HYbg';
+var api_key = 'NaqqS33fTUmyQcvbuIUCKA';
 
 // ensure there's an api key
 scene.subscribe({
